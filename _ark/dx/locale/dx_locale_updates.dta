@@ -1494,6 +1494,13 @@
    "Type your theme name here.")
 (save_track_theme_desc
    "Please don't use any spaces or special characters in your name.")
+; Custom career goals
+(acc_cat_dx_band
+   "Deluxe Goals")
+(acc_cat_dx_guitar
+   "Deluxe Goals")
+(acc_cat_dx_vox
+   "Deluxe Goals")
 (acc_dx_coverband
    "Cover Band")
 (acc_dx_coverband_desc
@@ -1510,6 +1517,22 @@
    "Slay Queen")
 (acc_dx_slayqueen_desc
    "Conquer the Stage and Earn 5 <alt>*</alt> on these Vocal hits.")
+(acc_dx_whatsinthebox
+   "What's in the Box?")
+(acc_dx_whatsinthebox_desc
+   "Earn 5 <alt>*</alt> on these box songs to figure out what's actually inside the box.")
+(acc_dx_the27club
+   "The 27 Club")
+(acc_dx_the27club_desc
+   "Play 5 songs from artists who had a member die at 27.")
+(acc_dx_weezer
+   "You Just Got Weezered!")
+(acc_dx_weezer_desc
+   "Earn 5 <alt>*</alt> on Weezer 10 songs.")
+(acc_dx_fbi
+   "FBI, OPEN UP!")
+(acc_dx_fbi_desc
+   "Earn 5 <alt>*</alt> on these jailbait classics!")  
 ; RB3 practice sections
 (alt_chorus "Alt chorus")
 (bass_riff_a "Bass riff a")

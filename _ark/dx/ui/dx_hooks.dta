@@ -57,9 +57,36 @@
    {push_back {find $syscfg campaign accomplishment_info accomplishments acc_dlc_ugcrap filter} $entry}
 }
 
+{push_back {find $syscfg campaign accomplishment_info accomplishment_categories}
+   (acc_cat_dx_band
+      (group acc_grp_band))
+   (acc_cat_dx_guitar
+      (group acc_grp_guitar))
+   (acc_cat_dx_vox
+      (group acc_grp_vox))   
+}
+
+{push_back {find $syscfg campaign accomplishment_info precached_filters}
+   (careerfilter_dx_the27club
+      (kFilterArtist Nirvana)
+      (kFilterArtist "Amy Winehouse")
+      (kFilterArtist "Echo & the Bunnymen")
+      (kFilterArtist "Janis Joplin")
+      (kFilterArtist "The Doors")
+      (kFilterArtist "The Grateful Dead")
+      (kFilterArtist "The Jimi Hendrix Experience")
+      (kFilterArtist "The Rolling Stones")
+   )
+}
+
+{push_back {find $syscfg campaign accomplishment_info precached_filters}
+   (careerfilter_dx_weezer
+      (kFilterArtist "Weezer"))
+}
+
 {push_back {find $syscfg campaign accomplishment_info accomplishments}
    (acc_dx_coverband
-      (category acc_cat_band_dlc)
+      (category acc_cat_dx_band)
       (accomplishment_type kAccomplishmentTypeSongListConditional)
       (metascore_value career_fans_medium)
       (units_token unit_songs_plural)
@@ -75,7 +102,7 @@
 
 {push_back {find $syscfg campaign accomplishment_info accomplishments}
    (acc_dx_hourglass
-      (category acc_cat_guitar_dlc)
+      (category acc_cat_dx_guitar)
       (accomplishment_type kAccomplishmentTypeSongListConditional)
       (metascore_value career_fans_expert)
       (units_token unit_songs_plural)
@@ -94,7 +121,7 @@
 
 {push_back {find $syscfg campaign accomplishment_info accomplishments}
    (acc_dx_strumsaga
-      (category acc_cat_guitar_dlc)
+      (category acc_cat_dx_guitar)
       (accomplishment_type kAccomplishmentTypeSongListConditional)
       (metascore_value career_fans_expert)
       (units_token unit_songs_plural)
@@ -113,7 +140,7 @@
 
 {push_back {find $syscfg campaign accomplishment_info accomplishments}
    (acc_dx_slayqueen
-      (category acc_cat_vox_dlc)
+      (category acc_cat_dx_vox)
       (accomplishment_type kAccomplishmentTypeSongListConditional)
       (metascore_value career_fans_expert)
       (units_token unit_songs_plural)
@@ -127,6 +154,86 @@
             (instrument kScoreVocals)
             (difficulty kDifficultyExpert)))
       (songs beforehecheats callmemaybe justdance miserybusiness2 parrtyintheusa sowhat)
+   )
+}
+
+{push_back {find $syscfg campaign accomplishment_info accomplishments}
+   (acc_dx_whatsinthebox
+      (category acc_cat_dx_band)
+      (accomplishment_type kAccomplishmentTypeSongListConditional)
+      (metascore_value career_fans_medium)
+      (units_token unit_songs_plural)
+      (units_token_singular unit_songs_singular)
+      (dynamic_prereqs
+         (num_songs 5)
+         (songs dickinabox heartshapedbox jukeboxhero maninthebox tennesseeflattopbox))
+      (num_songs 5)
+      (conditions
+         (stars 5))
+      (songs dickinabox heartshapedbox jukeboxhero maninthebox tennesseeflattopbox)
+   )
+}
+
+{push_back {find $syscfg campaign accomplishment_info accomplishments}
+   (acc_dx_the27club
+      (category acc_cat_dx_band)
+      (accomplishment_type kAccomplishmentTypeSongFilterConditional)
+      (metascore_value career_fans_medium)
+      (units_token unit_songs_plural)
+      (units_token_singular unit_songs_singular)
+      (dynamic_prereqs
+         (num_songs 5)
+         (precached_filter careerfilter_dx_the27club))
+      (num_songs 5)
+      (conditions
+         (stars 2))
+      (part_difficulty_sym band)
+      (filter
+         (kFilterArtist Nirvana)
+         (kFilterArtist "Amy Winehouse")
+         (kFilterArtist "Echo & the Bunnymen")
+         (kFilterArtist "Janis Joplin")
+         (kFilterArtist "The Doors")
+         (kFilterArtist "The Grateful Dead")
+         (kFilterArtist "The Jimi Hendrix Experience")
+         (kFilterArtist "The Rolling Stones")
+      )
+   )
+}
+
+{push_back {find $syscfg campaign accomplishment_info accomplishments}
+   (acc_dx_weezer
+      (category acc_cat_dx_band)
+      (accomplishment_type kAccomplishmentTypeSongFilterConditional)
+      (metascore_value career_fans_medium)
+      (units_token unit_songs_plural)
+      (units_token_singular unit_songs_singular)
+      (dynamic_prereqs
+         (num_songs 10)
+         (precached_filter careerfilter_dx_weezer))
+      (num_songs 10)
+      (conditions
+         (stars 5))
+      (part_difficulty_sym band)
+      (filter
+         (kFilterArtist "Weezer"))
+   )
+}
+
+{push_back {find $syscfg campaign accomplishment_info accomplishments}
+   (acc_dx_fbi
+      (category acc_cat_dx_band)
+      (accomplishment_type kAccomplishmentTypeSongListConditional)
+      (metascore_value career_fans_medium)
+      (units_token unit_songs_plural)
+      (units_token_singular unit_songs_singular)
+      (dynamic_prereqs
+         (num_songs 4)
+         (songs seventeen mysharona dontstandsoclosetome iloverocknroll))
+      (num_songs 4)
+      (conditions
+         (stars 5))
+      (songs seventeen mysharona dontstandsoclosetome iloverocknroll)
    )
 }
 
