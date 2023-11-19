@@ -200,7 +200,7 @@
    (acc_dx_weezer
       (category acc_cat_dx_band)
       (accomplishment_type kAccomplishmentTypeSongFilterConditional)
-      (metascore_value career_fans_medium)
+      (metascore_value career_fans_hard)
       (units_token unit_songs_plural)
       (units_token_singular unit_songs_singular)
       (dynamic_prereqs
