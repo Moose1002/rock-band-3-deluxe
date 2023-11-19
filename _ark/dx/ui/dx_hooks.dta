@@ -165,7 +165,7 @@
       (num_songs 4)
       (conditions
          (stars 5))
-      (songs RLCHZ_TLI_DICKINABOX heartshapedbox jukeboxhero maninthebox tennesseeflattopbox)
+      (songs RLCHZ_TLI_DICKINABOX heartshapedbox jukeboxhero maninthebox)
    )
 }
 
