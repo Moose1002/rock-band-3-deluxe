@@ -1528,7 +1528,7 @@
 (acc_dx_weezer
    "You Just Got Weezered!")
 (acc_dx_weezer_desc
-   "Earn 5 <alt>*</alt> on Weezer 10 songs.")
+   "Earn 5 <alt>*</alt> on 10 Weezer songs.")
 (acc_dx_fbi
    "FBI, OPEN UP!")
 (acc_dx_fbi_desc

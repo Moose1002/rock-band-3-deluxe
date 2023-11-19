@@ -57,14 +57,9 @@
    {push_back {find $syscfg campaign accomplishment_info accomplishments acc_dlc_ugcrap filter} $entry}
 }
 
-{push_back {find $syscfg campaign accomplishment_info accomplishment_categories}
-   (acc_cat_dx_band
-      (group acc_grp_band))
-   (acc_cat_dx_guitar
-      (group acc_grp_guitar))
-   (acc_cat_dx_vox
-      (group acc_grp_vox))   
-}
+{push_back {find $syscfg campaign accomplishment_info accomplishment_categories} (acc_cat_dx_band (group acc_grp_band))}
+{push_back {find $syscfg campaign accomplishment_info accomplishment_categories} (acc_cat_dx_guitar (group acc_grp_guitar))}
+{push_back {find $syscfg campaign accomplishment_info accomplishment_categories} (acc_cat_dx_vox (group acc_grp_vox))}
 
 {push_back {find $syscfg campaign accomplishment_info precached_filters}
    (careerfilter_dx_the27club
@@ -165,12 +160,12 @@
       (units_token unit_songs_plural)
       (units_token_singular unit_songs_singular)
       (dynamic_prereqs
-         (num_songs 5)
-         (songs dickinabox heartshapedbox jukeboxhero maninthebox tennesseeflattopbox))
-      (num_songs 5)
+         (num_songs 4)
+         (songs RLCHZ_TLI_DICKINABOX heartshapedbox jukeboxhero maninthebox))
+      (num_songs 4)
       (conditions
          (stars 5))
-      (songs dickinabox heartshapedbox jukeboxhero maninthebox tennesseeflattopbox)
+      (songs RLCHZ_TLI_DICKINABOX heartshapedbox jukeboxhero maninthebox tennesseeflattopbox)
    )
 }
 
@@ -191,7 +186,7 @@
       (filter
          (kFilterArtist Nirvana)
          (kFilterArtist "Amy Winehouse")
-         (kFilterArtist "Echo & the Bunnymen")
+         (kFilterArtist "Echo & The Bunnymen")
          (kFilterArtist "Janis Joplin")
          (kFilterArtist "The Doors")
          (kFilterArtist "The Grateful Dead")
@@ -242,7 +237,7 @@
 ;{set_elem {find $syscfg modes defaults allow_overdrive_phrases} 1 {quote {! {&& {session_mgr is_local} {modifier_mgr is_modifier_active mod_dx_no_overdrive}}}}}
 ;{set_elem {find $syscfg modes defaults enable_overdrive} 1 {quote {! {&& {session_mgr is_local} {modifier_mgr is_modifier_active mod_dx_no_overdrive}}}}}
 ;{set_elem {find $syscfg modes practice allow_overdrive_phrases} 1 {quote {modifier_mgr is_modifier_active mod_practiceoverdrive}}}
-;{set_elem {find $syscfg modes practice enable_overdrive} 1 {quote {modifier_mgr is_modifier_active mod_practiceoverdrive}}}
+;{set_elem {find $syscfg modes prajctice enable_overdrive} 1 {quote {modifier_mgr is_modifier_active mod_practiceoverdrive}}}
 ;{set_elem {find $syscfg modes defaults update_leaderboards} 1 {quote {if_else {|| {modifier_mgr is_modifier_active mod_auto_play} {modifier_mgr is_modifier_active mod_auto_kick}} FALSE TRUE}}}
 ;{set_elem {find $syscfg modes defaults enable_coda} 1 {quote {! {modifier_mgr is_modifier_active mod_nobre}}}}
 
