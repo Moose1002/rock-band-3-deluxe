@@ -1437,7 +1437,7 @@
 
 (overshell_real_guitar_22 "Pro Guitar 22")
 (overshell_real_bass_22 "Pro Bass 22")
-
+(overshell_rhythm_guitar "Rhythm")
 
 ;color selector options
 (os_dx_1_green "1: Green")

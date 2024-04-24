@@ -256,3 +256,4 @@
    (packets_per_chunk 20))
 #include magnu.dta
 #merge ../../../system/run/config/default.dta
+#merge ../../../system/run/config/beatmatch.dta

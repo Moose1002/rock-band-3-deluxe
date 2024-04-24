@@ -446,6 +446,7 @@
          {array 0})
       {push_back $options overshell_guitar}
       {push_back $options overshell_bass}
+      {push_back $options overshell_rhythm_guitar}
       {push_back $options overshell_keys}
       {if {|| $dx_additional_parts {! {session_mgr is_local}}}
          {if {== $dx_joypad_type_vocals kControllerGuitar}
@@ -476,6 +477,7 @@
             {do
                {push_back $options overshell_guitar}
                {push_back $options overshell_bass}
+               {push_back $options overshell_rhythm_guitar}
                {push_back $options overshell_keys}
             }
          }
@@ -502,6 +504,7 @@
             {do
                {push_back $options overshell_guitar}
                {push_back $options overshell_bass}
+               {push_back $options overshell_rhythm_guitar}
                {push_back $options overshell_keys}
                {if {== $dx_joypad_type_keys kControllerVocals}
                   {push_back $options overshell_real_keys}}
@@ -521,6 +524,7 @@
       {push_back $options overshell_real_keys}
       {push_back $options overshell_guitar}
       {push_back $options overshell_bass}
+      {push_back $options overshell_rhythm_guitar}
       {if {|| $dx_additional_parts {! {session_mgr is_local}}}
          {push_back $options overshell_drums}
          {unless {== {ui current_screen} game_screen}
@@ -540,6 +544,7 @@
       {push_back $options overshell_real_bass}
       {push_back $options overshell_guitar}
       {push_back $options overshell_bass}
+      {push_back $options overshell_rhythm_guitar}
       {if {|| $dx_additional_parts {! {session_mgr is_local}}}
          {unless {== {ui current_screen} game_screen}
             {push_back $options overshell_vocal_solo}
@@ -570,7 +575,7 @@
       }
       {unless {&& {== {ui current_screen} game_screen} {== {{$this get_user} get_controller_type} kControllerVocals}}
          {do
-            {push_back $options overshell_guitar} {push_back $options overshell_bass}
+            {push_back $options overshell_guitar} {push_back $options overshell_bass} {push_back $options overshell_rhythm_guitar}
             {push_back $options overshell_drums} {push_back $options overshell_drums_pro}
             {push_back $options overshell_keys} {push_back $options overshell_real_keys}
             {push_back $options overshell_real_guitar} {push_back $options overshell_real_bass}
