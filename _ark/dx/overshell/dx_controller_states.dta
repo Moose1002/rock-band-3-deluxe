@@ -13,6 +13,7 @@
             {push_back $options os_instreset} ;shows controller reset menu if at least one instrument faking is active
       }
       {push_back $options os_pad_mapping}
+      {push_back $options os_rhythmselect}
       {if {== $dx_joypad_type_vocals kControllerVocals}
          {push_back $options os_button_remapper}
       }
@@ -41,6 +42,9 @@
                   {$this show_state dxState_InstrumentSwapVocals}
                )
             }
+         )
+         (os_rhythmselect
+            {$this show_state dxState_RhythmTrackSelector}
          )
          (os_instreset
             {if {! $dx_prompt_save}
@@ -217,6 +221,43 @@
          {dx_settings_dta_writer}}
       DX_SWAP_INSTRUMENT_TYPE_VOCALS
       {dx_log_writer info {sprint "Vocals instrument type has been changed to: " {find $syscfg joypad instrument_mapping analog}}}
+      DX_OS_CLOSE_MSG
+   )
+   (exit 
+      DX_OS_CLOSE_MSG
+   )
+   (on_cancel
+      {$this show_state dxState_ControllerMenu}
+   )
+)
+
+(dxState_RhythmTrackSelector
+   (view options)
+   (enter
+      {do
+         ($options
+            {array 0})
+         {push_back $options guitar}
+         {push_back $options bass}
+         {push_back $options keys}
+         {options.lst set_data $options}
+      }
+      {dx_overshell_msg os_instrumentswap_menu_vocals_desc}
+   )
+   (SELECT_MSG
+      {switch {$component selected_sym}
+         (guitar
+            {set $dx_rhythm_slot kTrackGuitar}
+            {set $dx_rhythm_part "PART GUITAR"}
+         )
+         (drums
+            {set $dx_rhythm_slot kTrackBass})
+         (keys
+            {set $dx_rhythm_slot kTrackKeys}
+         )
+      }
+      {if {! $dx_prompt_save}
+         {dx_settings_dta_writer}}
       DX_OS_CLOSE_MSG
    )
    (exit 

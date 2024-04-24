@@ -19,8 +19,7 @@
       (REAL_KEYS_H kAudioKeys kTrackRealKeys 'PART REAL_KEYS')
       (REAL_KEYS_X kAudioKeys kTrackRealKeys 'PART REAL_KEYS')
       (KEYS_ANIM_LH kAudioFake kTrackRealKeys 'PART KEYS_ANIM_LH')
-      (KEYS_ANIM_RH kAudioFake kTrackRealKeys 'PART KEYS_ANIM_RH')
-      (RHYTHM_GUITAR kAudioFake kTrackRhythmGuitar 'PART RHYTHM_GUITAR')))
+      (KEYS_ANIM_RH kAudioFake kTrackRealKeys 'PART KEYS_ANIM_RH')))
 (controllers
    (beatmatch_controller_mapping
       (guitar guitar)

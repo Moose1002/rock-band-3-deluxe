@@ -102,7 +102,7 @@
       ;TODO this is awful
       {if $dx_artist_mtv_line
          {if_else $mastervar ;check if this song is labelled as a cover or not
-            {dx_mtv_formatter $artistvar}
+            {dx_mtv_formatter $dx_rhythm_part}
             {dx_mtv_formatter {sprint {localize store_famous_by} ": " $artistvar}}
          }
       }

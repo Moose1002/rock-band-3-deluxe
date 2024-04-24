@@ -2497,7 +2497,7 @@
                (overshell_bass
                   {$this select_part kTrackBass})
                (overshell_rhythm_guitar
-                  {$this select_part kTrackRhythmGuitar})   
+                  {$this select_part $dx_rhythm_slot})   
                (overshell_keys
                   {$this select_part kTrackKeys})
                (overshell_real_guitar
