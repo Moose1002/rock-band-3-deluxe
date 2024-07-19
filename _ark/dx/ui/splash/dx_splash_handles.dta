@@ -4,8 +4,6 @@
       (
          "milohax bad!"
          "Hey bud, listen up!"
-         "Kimbey #1!"
-         "Saturday, the 28th of January, 2023!"
          "Arby's, we have The Meats!"
          "Welcome to the future of Rock Band 3!"
          "THIS IS ROCK BAND 3!"
@@ -25,6 +23,7 @@
          #endif
          #endif
          "Yes, you can turn off lanes."
+         "The hit window shrinks!"
          "Also try Amplitude!"
          "NAME THE TIME, NAME THE PLACE!"
          "Also Try Guitar Freaks!"
@@ -53,8 +52,8 @@
          "To the owner of the white sedan, you left your lights on!"
          "Do not vape the Rock Band Fog Juice!"
          "Do not eat the YARG gems!"
-         "djent is a genre!"
-         "djent is not a genre!"
+         "Djent is a genre!"
+         "Djent is not a genre!"
          "LESS GOOOOOOOO"
          "Who lives in a DTA under the sea?"
          "AM I A GUITAR? YOU ARE A GUITAR!"
@@ -62,9 +61,9 @@
          "needz moar metal!"
          "ROCK IT REAL!"
          "Not your momma's Guitar Hero!"
-         "no, worstcase.mid is not a creepypasta."
+         "No, worstcase.mid is not a creepypasta."
          "Don't (Only) Strum Down!"
-         "now draw her FCing Chiasm."
+         "Now draw her FCing Chiasm."
          "Also try YARG!"
          "PS3 has no games!"
          "One band to rock them all!"
@@ -74,8 +73,8 @@
          "Try it on a Steam Deck!"
          "Fly like a G6!"
          "Press START to rock!"
-         "self portrait!"
-         "brought to you by the milo weirdos!"
+         "Self portrait!"
+         "Brought to you by the Milo weirdos!"
          "Beyond Groovy!"
          "Press X to Jason!"
          "GamerGod88!"
@@ -87,77 +86,91 @@
          "fc closer"
          "GRYBO? I hardly knew her."
          "Jurgen is here!"
-         "works on my machine!"
+         "Works on my machine!"
          "Now with less crashes!*"
          "Trained classically, and contemporaneously!"
          "Now you're playing with the cool kids!"
          "Born to rock, forced to band!"
-         "welcome to the big leagues!"
+         "Welcome to the big leagues!"
          "Why so serious!"
          "Watch out for vampire milk bats!"
-         "also check out rb3_plus!"
-         "also check out rbhp!"
-         "awesomeness detection!"
-         "the duke of gravity found dead in miami!"
-         "it's like rb2dx, plus one!"
-         "lego rock band if it was real people!"
-         "we removed breakneck speed."
-         "moosejaw could beat goku!"
-         "you tellin' me a rock banned this deluxe?"
+         "Awesomeness Detection!"
+         "The Duke of Gravity found dead in Miami!"
+         "It's like RB2DX, plus one!"
+         "LEGO Rock Band if it was real people!"
+         "Moosejaw could beat Goku!"
+         "You tellin' me a rock banned this deluxe?"
          "removing guitar..."
-         "rock band 9+10!"
+         "Rock Band 9+10!"
          "Everyone says hi!"
          "l33t!"
-         "it's a psychobilly freakout!"
-         "open source!"
+         "It's a Psychobilly Freakout!"
+         "Open source!"
          "Fat free!"
          "Technically good!"
          "Ceci n'est pas une title screen!"
          "Random splash!"
-         "combat baby!"
+         "Combat Baby!"
          "Livestreamed!"
-         "discount code acai!"
+         "Discount code acai!"
          "Let's danec (central)!"
          "Peter Griffin!"
          "Sublime (text)!"
          "Team DLC doesn't use the U-word!"
-         "chad warden!"
+         "Chad Warden!"
          "BALLIIIIN'!!!"
-         "now with 100% more kimbey!"
-         "you have won uppies!"
-         "full combo!"
-         "hey mami, you sexy!"
-         "we fixed brainpower!"
-         "hol' up, baby please!"
-         "no! i'm with the science team!"
+         "You have won uppies!"
+         "Full Combo!"
+         "Hey mami, you sexy!"
+         "We fixed Brainpower!"
+         "Hol' up, Baby please!"
+         "No! I'm with the science team!"
          "lawl!"
          #ifdef HX_XBOX
-         "fatal crash intercepted!"
+         "Fatal crash intercepted!"
          #endif
          #ifdef HX_WII
          "Invalid write to 0x00000004, PC = 0x80412538"
          #endif
          #ifdef HX_PS3
-         "unmapped memory!"
+         "Unmapped memory!"
          #endif
-         "luna was here!"
+         "Luna was here!"
          "jnack was here!"
-         "lysix was here!"
-         "dark was here!"
-         "linos was here!"
-         "scott was here!"
+         "LysiX was here!"
+         "Dark was here!"
+         "Linos was here!"
+         "Scott was here!"
+         "CarlMylo was here!"
          "don't mind that."
-         "may contain lennon!"
-         "milk club!"
-         "now with less manage_gig_screen!"
+         "May contain Lennon!"
+         "Milk club!"
+         "Now with less manage_gig_screen!"
          "<3!"
          "F O R C H R I S T !"
-         "roygb!"
-         "oboyoboy!"
-         "yboobyyo!"
+         "ROYGB!"
+         "OBOYOBOY!"
+         "YBOOBYYO!"
          "RB3DX costs less than a beefy 5 layer burrito!"
          "INTERNAL BUILD ONLY. DO NOT DISTRIBUTE IN ANY FORM."
-         "trans rights are human rights"
+         "Trans rights are human rights!"
+         "Fue sin querer queriendo."
+         "¿Homero, por qué estas jugando Clone Hero?"
+         "Un mod pedorro"
+         "Televisa presenta"
+         "D.E.P. Velocidad Suicida (2008-2024)"
+         "¡Más noble que una lechuga!"
+         "Guatemala Deluxe = Guatebuena"
+         "Nunca vas a hacerle FC a Through the Fire and Flames"
+         "¡Ataque de pánico!"
+         "Banda de Piedra Tres"
+         "¡Se están robando el tanque de agua!"
+         "¡Vendimos el cilindro de gas!"
+         "¡Dame tu fuerza, Pegaso!"
+         "Que feo canta, ¿qué no hay Dragon Ball Z?"
+         "Siete palabras, ¡ESENCIA!"
+         "De lujo"
+         "Saquen las rolitas"
       )
    )
 )
@@ -292,7 +305,9 @@
 
       {set $dx_random_number {random_int 0 500}}
       {if {== $dx_random_number 1}
-         {set $dx_splash_beta_egg TRUE}
+         {if $dx_debug
+            {set $dx_splash_beta_egg TRUE}
+         }
       }
       #ifndef _SHIP
       {set $dx_splash_beta_egg FALSE} ;test
@@ -305,11 +320,22 @@
          DX_INTERNAL_SPLASH_TEXT
       }
       #endif
-      #ifdef RB3E
-      {{{{sv8_panel find sv8_a} find cityscape_ao} find logo.tex} set_bitmap "dx/custom_textures/_additional_textures/rb3dx-rb3e_logo.png"}
-      #else
-      {{{{sv8_panel find sv8_a} find cityscape_ao} find logo.tex} set_bitmap "dx/custom_textures/_additional_textures/rb3dx_logo.png"}
-      #endif
+      ; set main menu logo based on season
+      {if_else $dx_seasonal_logos
+         {do
+            {get_date_time $year $month $day $hour $minute $second}
+            {cond
+               ({&& {== $month 2} {>= $day 7} {<= $day 17}} {set $dx_season valentines})
+               ({&& {== $month 4} {== $day 1}} {set $dx_season aprilfools})
+               ({== $month 6} {set $dx_season pride})
+               ({== $month 10} {set $dx_season halloween})
+               ({== $month 12} {set $dx_season christmas})
+               (else {set $dx_season standard})
+            }
+         }
+         {set $dx_season standard}
+      }
+      {{{{sv8_panel find sv8_a} find cityscape_ao} find logo.tex} set_bitmap {sprint "dx/custom_textures/_additional_textures/logo-" $dx_season #ifdef RB3E "-rb3e" #endif ".png"}}
       {if {== $dx_splash_beta_egg TRUE}
          {{{{sv8_panel find sv8_a} find cityscape_ao} find logo.mesh} set_showing FALSE}
       }

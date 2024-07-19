@@ -17,8 +17,9 @@
    {dx_setting_saver dx_settings dx_forced_main_menu_bg $dx_forced_main_menu_bg}
    {dx_setting_saver dx_settings dx_forced_song_select_bg $dx_forced_song_select_bg}
    {dx_setting_saver dx_settings dx_sv8_dx_vers $dx_sv8_dx_vers}
-   {dx_setting_saver dx_settings dx_forced_song_load_bg $dx_forced_song_load_bg}
+   {dx_setting_saver dx_settings dx_forced_outro_vignette $dx_forced_outro_vignette}
    {dx_setting_saver dx_settings emulate_fps $emulatefps}
+   {dx_setting_saver dx_settings dx_vsync $dx_vsync}
    {dx_setting_saver dx_settings track_speed $trackspeed}
    {dx_setting_saver dx_settings trackspeed_guitar $trackspeed_guitar}
    {dx_setting_saver dx_settings trackspeed_bass $trackspeed_bass}
@@ -33,8 +34,10 @@
    {dx_setting_saver dx_settings dx_jurgen_sound $dx_jurgen_sound}
    ;{dx_setting_saver dx_settings dx_nice_sound $dx_nice_sound}
    {dx_setting_saver dx_settings dx_song_select_noise $dx_song_select_noise}
+   {dx_setting_saver dx_settings dx_scroll_sound $dx_scroll_sound}
    {dx_setting_saver dx_settings dx_whammy_fx_enabled $dx_whammy_fx}
    {dx_setting_saver dx_settings dx_instrument_fx $dx_instrument_fx}
+   {dx_setting_saver dx_settings dx_fail_flash $dx_fail_flash}
    {dx_setting_saver dx_settings dx_long_mtv_delay $dx_long_mtv_delay}
    {dx_setting_saver dx_settings dx_set_postfx $dx_postfx}
    {dx_setting_saver dx_settings dx_currentsong_prefix $dx_currentsong_prefix}
@@ -51,6 +54,8 @@
    {dx_setting_saver dx_settings dx_author_mtv_line $dx_author_mtv_line}
    {dx_setting_saver dx_settings dx_song_key_mtv_line $dx_song_key_mtv_line}
    {dx_setting_saver dx_settings dx_countdown_enabled $dx_countdown_enabled}
+   {dx_setting_saver dx_settings dx_song_select_rings $dx_song_select_rings}
+   {dx_setting_saver dx_settings dx_high_score_report $dx_high_score_report}
    {dx_setting_saver dx_settings dx_hide_on_countdown $dx_hide_on_countdown}
    {dx_setting_saver dx_settings dx_end_song_feedback $dx_end_song_feedback}
    {dx_setting_saver dx_settings dx_you_rock $dx_you_rock}
@@ -108,6 +113,7 @@
    {dx_setting_saver dx_settings dx_streak_counter $dx_streak_counter}
    {dx_setting_saver dx_settings dx_note_streak_popups $dx_note_streak_popups}
    {dx_setting_saver dx_settings dx_od_ready_popups $dx_od_ready_popups}
+   {dx_setting_saver dx_settings dx_diff_popups $dx_diff_popups}
    {dx_setting_saver dx_settings dx_force_remote_vox $dx_force_remote_vox}
    {dx_setting_saver dx_settings dx_dim_remote_players $dx_dim_remote_players}
    {dx_setting_saver dx_settings dx_highway_text $dx_highway_text}
@@ -166,7 +172,8 @@
    {dx_setting_saver dx_track_theme overdrive_color ($dx_overdrive_r $dx_overdrive_g $dx_overdrive_b)}
    {dx_setting_saver dx_track_theme gems $dx_gem}
    {dx_setting_saver dx_track_theme strikeline $dx_smasher}
-   {dx_setting_saver dx_track_theme flames $dx_flames}
+   {dx_setting_saver dx_track_theme flares $dx_flares}
+   {dx_setting_saver dx_track_theme particles $dx_particles}
    {dx_setting_saver dx_track_theme sustains $dx_sustain}
    {dx_setting_saver dx_track_theme lanes $dx_lanes}
    {dx_setting_saver dx_track_theme score_box $dx_score_box}

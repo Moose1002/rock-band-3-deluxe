@@ -75,6 +75,13 @@
       {saveload_mgr is_initial_load_done})
    DX_MAIN_HANDLES
    (enter
+      {if $dx_event_mode
+         {$this iterate BandButton $l {$this disable $l} {$l set_showing FALSE}}
+         {$this enable mb_playnow.btn} {mb_playnow.btn set_showing TRUE}
+         {mb_playnow.btn set text_token dx_freeplay}
+         {$this enable mb_career.btn} {mb_career.btn set_showing TRUE}
+         {mb_career.btn set text_token dx_play_a_show}
+      }
       {if
          [first_user]
          {profile_mgr
@@ -126,7 +133,17 @@
       {overshell set_allow_real_guitar_flow TRUE}
       {overshell update_all}
       {$this dx_main_on_enter}
-      {campaign clear_current_goal})
+      {set $got_meta FALSE}
+      {campaign clear_current_goal}
+      {$this set_state kMainHubState_Main})
+   #ifndef HX_WII
+   (poll
+      {if {&& {! $got_meta} {content_mgr refresh_done}}
+         {set $got_meta TRUE}
+         {$this dx_now_playing}
+      }
+   )
+   #endif
    (exit
       {platform_mgr remove_sink $this}
       #ifdef HX_WII
@@ -137,9 +154,25 @@
       {switch
          $component
          (mb_playnow.btn
-            {$this set_state kMainHubState_PlayNow})
+            {if_else $dx_event_mode
+               {do
+                  {profile_mgr set_primary_profile_by_user $user}
+                  {net_sync set_ui_state kNetUI_WaitingChooseSong}
+                  {$this set_override kMainHubOverride_Waiting}
+               }
+               {$this set_state kMainHubState_PlayNow}
+            }
+         )
          (mb_career.btn
-            {$this set_state kMainHubState_Career})
+            {if_else $dx_event_mode
+               {do
+                  {input_mgr set_user $user}
+                  {set $stored_user $user}
+                  {$this dx_play_a_show}
+               }
+               {$this set_state kMainHubState_Career}
+            }
+         )
          (mb_trainers.btn
             {if_else
                {session_mgr is_local}
@@ -293,9 +326,15 @@
                   {song_select_panel set trainer_from_main_menu kControllerKeys}
                   {ui abstract_wipe}
                   {ui goto_screen song_select_enter_screen})
-               ({==
-                     {$user get_controller_type}
-                     kControllerRealGuitar}
+               (
+                  {||
+                     {== {$user get_controller_type} kControllerRealGuitar}
+                     ; dx - allow 5L guitar to enter Pro Guitar trainer for playtesting
+                     {&&
+                        {== {$user get_controller_type} kControllerGuitar}
+                        {modifier_mgr is_modifier_active mod_auto_play}
+                     }
+                  }
                   {gamemode set_mode trainer_real_guitar}
                   {input_mgr set_user $user}
                   {critical_user_listener set_critical_user $user}
@@ -454,6 +493,22 @@
       {net_sync set_ui_state kNetUI_MainMenu}
       {$this set_override kMainHubOverride_None})
    (BUTTON_DOWN_MSG
+      {if $dx_event_mode
+         {if_else
+            {== $action kAction_Up}
+            {do
+               {event_button_desc.lbl set_token_fmt {sprint {localize dx_freeplay_desc}}}
+            }
+            kDataUnhandled
+         }
+         {if_else
+            {== $action kAction_Down}
+            {do
+               {event_button_desc.lbl set_token_fmt {sprint {localize dx_play_a_show_desc}}}
+            }
+            kDataUnhandled
+         }
+      }
       {cond
          ({$this in_waiting_lock}
             TRUE)
@@ -539,6 +594,32 @@
              {$this dx_check_dx}
              {$this dx_check_xeniawrites}
              #endif)
+         #ifndef HX_WII
+         ({|| {== $action kAction_PageUp} {== $action kAction_PageDown}}
+            {if {! {ui in_transition}}
+               {if_else {content_mgr refresh_done}
+                  {if_else {meta_performer song}
+                     {if_else {&& {session is_local} {meta_performer song_id}}
+                        {do
+                           {profile_mgr set_primary_profile_by_user $user}
+                           {meta_performer reset_songs}
+                           {meta_performer set_song {symbol $metashortname}}
+                           {gamemode set_mode qp_coop}
+                           {ui abstract_wipe}
+                           {if {exists line1_fade}
+                              {delete line1_fade}
+                           }
+                           {ui goto_screen {music_library get_next_screen}}
+                        }
+                        kDataUnhandled
+                     }
+                     kDataUnhandled
+                  }
+                  kDataUnhandled
+               }
+            }
+         )
+         #endif
          kDataUnhandled})
    (refresh_message_provider
       {message_area.lst

@@ -261,22 +261,25 @@
             {gem_smashers_drum_nomip.tex iterate_refs $ref {$ref set alpha_cut TRUE}}
             {gem_smashers_drum.tex iterate_refs $ref {$ref set alpha_cut TRUE}}
          }
-         {if $dx_flames_needs_reset ;check if a new texture is queued
-            {dx_custom_texture_setter flames flames_caps gem_cap.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_glass1 broken_glass01.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_glass1_neg broken_glass01_neg.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_glass2 broken_glass02.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_guitar_inner flare_gtr_inner.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_guitar_outer flare_gtr_outer.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_guitar_style flare_gtr_style.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_inner flare_inner.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_outer flare_outer.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_style flare_style.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_smoke fx_smasher_smoke.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_shockwave radial_shockwave.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_spark spark.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_sparks_radial sparks_radial.tex $dx_flames}
-            {dx_custom_texture_setter flames flames_sparks_vertical sparks_vertical.tex $dx_flames}
+         {if $dx_flares_needs_reset ;check if a new texture is queued
+            {dx_custom_texture_setter flares flares_guitar_inner flare_gtr_inner.tex $dx_flares}
+            {dx_custom_texture_setter flares flares_guitar_outer flare_gtr_outer.tex $dx_flares}
+            {dx_custom_texture_setter flares flares_guitar_style flare_gtr_style.tex $dx_flares}
+            {dx_custom_texture_setter flares flares_inner flare_inner.tex $dx_flares}
+            {dx_custom_texture_setter flares flares_outer flare_outer.tex $dx_flares}
+            {dx_custom_texture_setter flares flares_style flare_style.tex $dx_flares}
+         }
+
+         {if $dx_particles_needs_reset ;check if a new texture is queued
+            {dx_custom_texture_setter particles particles_gem_cap gem_cap.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_glass1 broken_glass01.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_glass1_neg broken_glass01_neg.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_glass2 broken_glass02.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_shockwave radial_shockwave.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_smoke fx_smasher_smoke.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_spark spark.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_sparks_radial sparks_radial.tex $dx_particles}
+            {dx_custom_texture_setter particles particles_sparks_vertical sparks_vertical.tex $dx_particles}
          }
 
          {if $dx_sustain_needs_reset
@@ -308,17 +311,14 @@
             {dx_custom_texture_setter FALSE solo_box vox_slider_bkgrnd.tex $dx_solo_box}
          }
 
-         {if $dx_solo_box
-            {if_else {== $dx_solo_box none}
-               {beatmatch foreach_active_player $player
-                  {unless {== {$player instrument} vocals}
-                     {{{DX_FIND_LANED_TRACK find player_feedback} find tamb_Background.mesh} set_local_scale 2.64 2.64 2.64}
-                  }
-               }
-               {beatmatch foreach_active_player $player
-                  {unless {== {$player instrument} vocals}
-                     {{{DX_FIND_LANED_TRACK find player_feedback} find tamb_Background.mesh} set_local_scale 3.5 3 4}
-                  }
+         {beatmatch foreach_active_player $player
+            {unless {== {$player instrument} vocals}
+               {cond
+                  ({has_substr {sprint $dx_solo_box} "none"} {{{DX_FIND_LANED_TRACK find player_feedback} find tamb_Background.mesh} set_local_scale 2.64 2.64 2.64})
+                  ({has_substr {sprint $dx_solo_box} "rb3"} {{{DX_FIND_LANED_TRACK find player_feedback} find tamb_Background.mesh} set_local_scale 2.64 2.64 2.64})
+                  ({has_substr {sprint $dx_solo_box} "circular"} {{{DX_FIND_LANED_TRACK find player_feedback} find tamb_Background.mesh} set_local_scale 2.64 2.64 2.64})
+                  ({has_substr {sprint $dx_solo_box} "yarg"} {{{DX_FIND_LANED_TRACK find player_feedback} find tamb_Background.mesh} set_local_scale 2.64 2.64 2.64})
+                  (else {{{DX_FIND_LANED_TRACK find player_feedback} find tamb_Background.mesh} set_local_scale 3.5 3 4})
                }
             }
          }
@@ -337,13 +337,6 @@
          {if {! {exists dx_star_base.tex}}
             {new Tex dx_star_base.tex}
          }
-
-         ;crap workaround because this always needs to run
-         {if {== $dx_stars none} {set $dx_stars 'rock band 3'}}
-         {dx_custom_texture_setter stars score_star_frame dx_star_base.tex $dx_stars}
-         {dx_custom_texture_setter stars score_star_frame score_star_frame.tex $dx_stars}
-         {{coop_track_panel find dx_star_base.tex} iterate_refs $ref {$ref set diffuse_tex dx_star_base.tex}} ;apply the fc texture to the ring material
-         {{coop_track_panel find score_star_frame.tex} iterate_refs $ref {$ref set diffuse_tex dx_star_base.tex}} ;apply the fc texture to the ring material
          {if {! {exists dx_star_gold_0.tex}}
             {new Tex dx_star_gold_0.tex}
          }
@@ -377,20 +370,28 @@
          {if {! {exists dx_star_gold_10.tex}}
             {new Tex dx_star_gold_10.tex}
          }
-         {dx_custom_texture_setter gold_star_transitions 0 dx_star_gold_0.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 1 dx_star_gold_1.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 2 dx_star_gold_2.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 3 dx_star_gold_3.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 4 dx_star_gold_4.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 5 dx_star_gold_5.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 6 dx_star_gold_6.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 7 dx_star_gold_7.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 8 dx_star_gold_8.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 9 dx_star_gold_9.tex $dx_stars}
-         {dx_custom_texture_setter gold_star_transitions 10 dx_star_gold_10.tex $dx_stars}
-         {if {== $dx_stars 'rock band 3'} {set $dx_stars none}}
          
          {if $dx_stars_needs_reset
+            ;crap workaround because this always needs to run
+            {if {== $dx_stars none} {set $dx_stars 'rock band 3'}}
+            {dx_custom_texture_setter stars score_star_frame dx_star_base.tex $dx_stars}
+            {dx_custom_texture_setter stars score_star_frame score_star_frame.tex $dx_stars}
+            {{coop_track_panel find dx_star_base.tex} iterate_refs $ref {$ref set diffuse_tex dx_star_base.tex}} ;apply the fc texture to the ring material
+            {{coop_track_panel find score_star_frame.tex} iterate_refs $ref {$ref set diffuse_tex dx_star_base.tex}} ;apply the fc texture to the ring material
+            {dx_custom_texture_setter gold_star_transitions 0 dx_star_gold_0.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 1 dx_star_gold_1.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 2 dx_star_gold_2.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 3 dx_star_gold_3.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 4 dx_star_gold_4.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 5 dx_star_gold_5.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 6 dx_star_gold_6.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 7 dx_star_gold_7.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 8 dx_star_gold_8.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 9 dx_star_gold_9.tex $dx_stars}
+            {dx_custom_texture_setter gold_star_transitions 10 dx_star_gold_10.tex $dx_stars}
+            {if {== $dx_stars 'rock band 3'} {set $dx_stars none}}
+         
+         
             {dx_custom_texture_setter stars score_meter_wipe score_meter_wipe.tex $dx_stars}
             {dx_custom_texture_setter stars score_star_frame score_star_frame.tex $dx_stars}
             {if {exists dx_star_base.tex}
@@ -486,7 +487,8 @@
          {set $dx_font_needs_reset FALSE}
          {set $dx_solo_box_needs_reset FALSE}
          {set $dx_bre_needs_reset FALSE}
-         {set $dx_flames_needs_reset FALSE}
+         {set $dx_flares_needs_reset FALSE}
+         {set $dx_particles_needs_reset FALSE}
          {set $dx_smasher_needs_reset FALSE}
          {set $dx_gem_needs_reset FALSE}
          {set $dx_sustain_needs_reset FALSE}

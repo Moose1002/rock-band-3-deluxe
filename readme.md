@@ -2,24 +2,24 @@
 
 <img src="dependencies/media/header.gif" width="100%" alt="Header GIF">
 
-# Downloads and install instructions have been moved to our [brand new website](https://rb3dx.neocities.org/)!
+# Downloads and install instructions have been moved to our [brand new website](https://rb3dx.milohax.org/)!
 
 <br/> <br/>
 
 # Welcome to the *Rock Band 3 Deluxe* repository!
 
-### Below are instructions for building the game yourself.<br/>[Please visit our website if you're looking for downloads](https://rb3dx.neocities.org/).
+### Below are instructions for building the game yourself.<br/>[Please visit our website if you're looking for downloads](https://rb3dx.milohax.org/).
 
 <br/> <br/>
 
-# 📥 [Downloads](https://rb3dx.neocities.org/)
+# 📥 [Downloads](https://rb3dx.milohax.org/)
 
 </div>
 <br/> <br/>
 
 # 🔨 Building (NOT standard download and install)
 
-## NOTE: This is for *building the game*, for developers and contributors. <br/> If you're looking for downloads, [please visit our website](https://rb3dx.neocities.org/).
+## NOTE: This is for *building the game*, for developers and contributors. <br/> If you're looking for downloads, [please visit our website](https://rb3dx.milohax.org/).
 
 ### Installing Python (Required)
 
@@ -89,3 +89,5 @@ From here, you can make any personal modifications to the game or build it yours
 [dtab](https://github.com/mtolly/dtab) - For serializing `.dtb` script files
 
 [RB3DXBuildPkgPS3](https://github.com/InvoxiPlayGames/RB3DXBuildPkgPS3) - For building an RB3DX PKG for PS3
+
+[Wiimmfi ISO Patcher](https://wiimmfi.de/patcher/iso) - For self building an RB3DX image for wii. Binary locally in repo due to clean download restraints

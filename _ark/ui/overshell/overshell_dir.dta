@@ -82,7 +82,10 @@
    (types
       (overshell_slot
          (get_native_platform
-            $dx_overshell_platform
+            {do
+               {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
+               $dx_overshell_platform
+            }
          )
          (init
             {$this setup_static_lists}
@@ -92,10 +95,12 @@
             {$this cache_lists}
             {$this
                set_platform
-               {$this get_native_platform}})
+               {$this get_native_platform}}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (enter
             {$this init}
-            {modifiers.lst set circular 1}) ;circular modifiers menu
+            {modifiers.lst set circular 1}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}) ;circular modifiers menu
          (setup_providers
             ($char_provider $profiles_provider #ifdef HX_WII $friends_provider #else $invite_provider #endif $part_select_provider $cymbal_provider $modifier_provider)
             {chars.lst set_provider $char_provider}
@@ -107,7 +112,8 @@
             #endif
             {choose_part.lst set_provider $part_select_provider}
             {options_drum.lst set_provider $cymbal_provider}
-            {modifiers.lst set_provider $modifier_provider})
+            {modifiers.lst set_provider $modifier_provider}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (setup_static_lists
             {choose_diff.lst
                set_data
@@ -179,7 +185,8 @@
             {no_invitations.lst
                set_data
                (wii_friends_no_invitations_ok)}
-            #endif)
+            #endif
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (setup_online_options_list
             ($platform)
             {do
@@ -238,43 +245,77 @@
                   {push_back $options wii_friends_view_invite}}
                #endif
                {push_back $options overshell_return}
-               #ifdef HX_WII
-               {if_else
-                  {overshell in_wiifriend_invite}
-                  {do
-                     {options.lst set_data $options}}
-                  {do
-                     #endif
-                     #ifdef HX_WII
-                     {if
-                        {&&
-                           {!
-                              {platform_mgr is_online_restricted}}
-                           {!
-                              {meta_performer are_credits_pending}}}
-                        {if $gotcha
-                           {if_else $online_enabled
-                              {switch $dx_connected_server
-                                 (none {push_back $options overshell_online_options})
-                                 (gocentral {push_back $options go_overshell_online_options})
-                                 (ashcentral {push_back $options ash_overshell_online_options})
-                                 (live {push_back $options live_overshell_online_options})
-                                 (liveless {push_back $options liveless_overshell_online_options})
-                              }
-                              {switch $dx_connected_server
-                                 (none {push_back $options overshell_register_online})
-                                 (gocentral {push_back $options go_overshell_register_online})
-                                 (ashcentral {push_back $options ash_overshell_register_online})
-                                 (live {push_back $options live_overshell_register_online})
-                                 (liveless {push_back $options liveless_overshell_register_online})
+               {unless $dx_event_mode
+                  #ifdef HX_WII
+                  {if_else
+                     {overshell in_wiifriend_invite}
+                     {do
+                        {options.lst set_data $options}}
+                     {do
+                        #endif
+                        #ifdef HX_WII
+                        {if
+                           {&&
+                              {!
+                                 {platform_mgr is_online_restricted}}
+                              {!
+                                 {meta_performer are_credits_pending}}}
+                           {if $gotcha
+                              {if_else $online_enabled
+                                 {switch $dx_connected_server
+                                    (none {push_back $options overshell_online_options})
+                                    (gocentral {push_back $options go_overshell_online_options})
+                                    (ashcentral {push_back $options ash_overshell_online_options})
+                                    (live {push_back $options live_overshell_online_options})
+                                    (liveless {push_back $options liveless_overshell_online_options})
+                                 }
+                                 {switch $dx_connected_server
+                                    (none {push_back $options overshell_register_online})
+                                    (gocentral {push_back $options go_overshell_register_online})
+                                    (ashcentral {push_back $options ash_overshell_register_online})
+                                    (live {push_back $options live_overshell_register_online})
+                                    (liveless {push_back $options liveless_overshell_register_online})
+                                 }
                               }
                            }
+                           {if {modifier_mgr is_modifier_active mod_auto_play}
+                              {push_back $options overshell_dx_bot_settings} ; dx - show autoplay settings when active
+                           }
                         }
-                        {if {modifier_mgr is_modifier_active mod_auto_play}
-                           {push_back $options overshell_dx_bot_settings} ; dx - show autoplay settings when active
+                        #else
+                        {if_else $online_enabled
+                           {switch $dx_connected_server
+                              (none {push_back $options overshell_online_options})
+                              (gocentral {push_back $options go_overshell_online_options})
+                              (ashcentral {push_back $options ash_overshell_online_options})
+                              (live {push_back $options live_overshell_online_options})
+                              (liveless {push_back $options liveless_overshell_online_options})
+                           }
+                           {switch $dx_connected_server
+                              (none {push_back $options overshell_register_online})
+                              (gocentral {push_back $options go_overshell_register_online})
+                              (ashcentral {push_back $options ash_overshell_register_online})
+                              (live {push_back $options live_overshell_register_online})
+                              (liveless {push_back $options liveless_overshell_register_online})
+                           }
                         }
-                     }
-                     #else
+                        #endif
+                        #ifdef HX_WII
+                        {if
+                           {&&
+                              {!
+                                 {memcardmgr is_disable_writing}}
+                              {!
+                                 {join_invite_panel join_in_progress}}}
+                           {push_back $options overshell_wiiprofile_options}}
+                        #endif
+                        {push_back $options overshell_change_character}
+                        {push_back $options overshell_game_options}
+                        {push_back $options overshell_leave}
+                        {options.lst set_data $options}
+                        #ifdef HX_WII}}
+                  #else
+                  {if $gotcha
                      {if_else $online_enabled
                         {switch $dx_connected_server
                            (none {push_back $options overshell_online_options})
@@ -291,52 +332,28 @@
                            (liveless {push_back $options liveless_overshell_register_online})
                         }
                      }
-                     #endif
-                     #ifdef HX_WII
-                     {if
-                        {&&
-                           {!
-                              {memcardmgr is_disable_writing}}
-                           {!
-                              {join_invite_panel join_in_progress}}}
-                        {push_back $options overshell_wiiprofile_options}}
-                     #endif
-                     {push_back $options overshell_change_character}
-                     {push_back $options overshell_game_options}
-                     {push_back $options overshell_leave}
-                     {options.lst set_data $options}
-                     #ifdef HX_WII}}
-               #else
-               {if $gotcha
-                  {if_else $online_enabled
-                     {switch $dx_connected_server
-                        (none {push_back $options overshell_online_options})
-                        (gocentral {push_back $options go_overshell_online_options})
-                        (ashcentral {push_back $options ash_overshell_online_options})
-                        (live {push_back $options live_overshell_online_options})
-                        (liveless {push_back $options liveless_overshell_online_options})
-                     }
-                     {switch $dx_connected_server
-                        (none {push_back $options overshell_register_online})
-                        (gocentral {push_back $options go_overshell_register_online})
-                        (ashcentral {push_back $options ash_overshell_register_online})
-                        (live {push_back $options live_overshell_register_online})
-                        (liveless {push_back $options liveless_overshell_register_online})
-                     }
+                  }
+                  {if {modifier_mgr is_modifier_active mod_auto_play}
+                     {push_back $options overshell_dx_bot_settings} ; dx - show autoplay settings when active
+                  }
+                  {set $dx_users 0}
+                  {user_mgr foreach_user $user
+                     {set $dx_users {+ $dx_users 1}}
+                  }
+                  {if {&& {! {session_mgr is_local}} {> $dx_users 1}}
+                     {push_back $options overshell_dx_quick_chat} ; dx - show quick chat menu when online
                   }
                }
-               {if {modifier_mgr is_modifier_active mod_auto_play}
-                  {push_back $options overshell_dx_bot_settings} ; dx - show autoplay settings when active
-               }
-               {set $dx_users 0}
-               {user_mgr foreach_user $user
-                  {set $dx_users {+ $dx_users 1}}
-               }
-               {if {&& {! {session_mgr is_local}} {> $dx_users 1}}
-                  {push_back $options overshell_dx_quick_chat} ; dx - show quick chat menu when online
+               {if {&& $dx_event_mode $dx_event_service}
+                  {push_back $options os_event_options}
                }
                {push_back $options overshell_change_character}
-               {push_back $options overshell_game_options}
+               {if_else $dx_event_mode
+                  {if $dx_event_service
+                     {push_back $options overshell_game_options}
+                  }
+                  {push_back $options overshell_game_options}
+               }
                {push_back $options overshell_leave}
                {options.lst set_data $options}
                #endif})
@@ -350,7 +367,8 @@
                   {push_back $options overshell_sign_in_continue}}
                {push_back $options overshell_sign_in}
                {push_back $options overshell_sign_in_cancel}
-               {sign_in_to_register.lst set_data $options}})
+               {sign_in_to_register.lst set_data $options}}
+               {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (setup_game_options_list
             ($controller_type $online_options $online_enabled $in_game $solo)
             {do
@@ -491,6 +509,7 @@
                {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (refresh_list_types_in_nav_chain
             ($list $in_track_mode)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {if
                $list
                {do
@@ -562,6 +581,7 @@
                   {$list get nav_down}}})
          (update_controller_type
             ($controller_type $controller_font_char)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {slot_instrument_icon.lbl set icon $controller_font_char}
             {mic_arrows.grp
                set_showing
@@ -573,12 +593,14 @@
                {difficulty_pos_non_vocals.trg trigger}}})
          (update_sign_in_continue
             ($can_continue)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {if_else
                $can_continue
                {sign_in_to_register.lst enable_data overshell_sign_in_continue}
                {sign_in_to_register.lst disable_data overshell_sign_in_continue}})
          (update_kick_allowed
             ($can_kick)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {if_else
                $can_kick
                {online_options.lst enable_data overshell_kick}
@@ -656,14 +678,20 @@
          #endif
          (update_local_status
             ($is_local)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {pad_num.lbl set_showing $is_local})
          (update_pad_num
             ($pad_num)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {pad_num.lbl set_int $pad_num})
          (button_pulse_joined
-            {button_pulse_joined.trig trigger})
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
+            {button_pulse_joined.trig trigger}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (button_pulse_unjoined
-            {button_pulse_unjoined.trig trigger})
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
+            {button_pulse_unjoined.trig trigger}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (update_user_name
             ($user)
             #ifdef HX_PS3
@@ -680,13 +708,15 @@
             {user_name.lbl set_token_fmt {sprint $dx_current_player_name_sanitized}}
             #else
             {user_name.lbl set_user_name $user}
-            #endif)
+            #endif
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (update_char_provider
             ($provider)
             {chars.lst refresh})
          (update_users_provider
             ($provider)
-            {users.lst set_provider $provider})
+            {users.lst set_provider $provider}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (update_remote_status
             ($status_token_fmt)
             {remote_status.lbl set_token_fmt $status_token_fmt})
@@ -753,10 +783,32 @@
                   {lefty_and_static_toggle.lbl set text_token overshell_righty_flip}}})
          (update_auto_vocals_enabled
             ($enabled)
-            {auto_vocals.chk set checked $enabled})
+            {if {! $got_check_1_pos}
+               {set $got_check_1_pos TRUE}
+               {set $check_1_pos_stored {auto_vocals.chk get_local_pos_index 0}}
+            }
+            {if_else $actually_show_checks
+               {do
+                  {auto_vocals.chk set_local_pos_index 0 $check_1_pos_stored}
+                  {auto_vocals.chk set checked $enabled}
+               }
+               {auto_vocals.chk set_local_pos_index 0 {+ $check_1_pos_stored 1500}}
+            }
+         )
          (update_no_fail_enabled
             ($enabled)
-            {no_fail.chk set checked $enabled})
+            {if {! $got_check_2_pos}
+               {set $got_check_2_pos TRUE}
+               {set $check_2_pos_stored {no_fail.chk get_local_pos_index 0}}
+            }
+            {if_else $actually_show_checks
+               {do
+                  {no_fail.chk set_local_pos_index 0 $check_2_pos_stored}
+                  {no_fail.chk set checked $enabled}
+               }
+               {no_fail.chk set_local_pos_index 0 {+ $check_2_pos_stored 1500}}
+            }
+         )
          (update_in_game_options
             ($quit_token $can_skip $restart $change_diff $metronome $practice #ifdef HX_WII $trainer #endif $can_quit)
             {do
@@ -768,18 +820,20 @@
                   {push_back $options wii_friends_view_invite}}
                #endif
                {push_back $options overshell_return}
-               ;Shows the pause button only if session is local and nopause is enabled
-               {if
-                  {&&
-                     {modifier_mgr is_modifier_active mod_nopause}
-                     {session_mgr is_local}
-                     $restart
+               {unless $dx_event_mode
+                  ;Shows the pause button only if session is local and nopause is enabled
+                  {if
+                     {&&
+                        {modifier_mgr is_modifier_active mod_nopause}
+                        {session_mgr is_local}
+                        $restart
+                     }
+                     {push_back $options os_pause}
                   }
-                  {push_back $options os_pause}
+                  {if
+                     $restart
+                     {push_back $options overshell_restart}}
                }
-               {if
-                  $restart
-                  {push_back $options overshell_restart}}
                {set $dx_users 0}
                {user_mgr foreach_user $user
                   {set $dx_users {+ $dx_users 1}}
@@ -805,16 +859,23 @@
                {if {== {ui current_screen} coop_endgame_screen}
                   {push_back $options overshell_choose_part}
                }
-               {push_back $options overshell_game_options}
-               {if_else $can_skip
-                  {do
-                     ($quit_options {array 0})
-                     {push_back $quit_options overshell_skip_song}
-                     {push_back $quit_options $quit_token}
-                     {options_end_game.lst set_data $quit_options}
-                     {push_back $options overshell_end_game}
+               {if_else $dx_event_mode
+                  {if $dx_event_service
+                     {push_back $options overshell_game_options}
                   }
-                  {push_back $options $quit_token}
+                  {push_back $options overshell_game_options}
+               }
+               {unless $dx_event_mode
+                  {if_else $can_skip
+                     {do
+                        ($quit_options {array 0})
+                        {push_back $quit_options overshell_skip_song}
+                        {push_back $quit_options $quit_token}
+                        {options_end_game.lst set_data $quit_options}
+                        {push_back $options overshell_end_game}
+                     }
+                     {push_back $options $quit_token}
+                  }
                }
                {unless
                   $practice
@@ -832,6 +893,7 @@
                {options.lst disable_data overshell_song_options_in_game}})
          (update_character_portrait
             ($tex)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {choose_character.mat
                set
                diffuse_tex
@@ -917,6 +979,7 @@
          #ifndef HX_WII
          (set_can_change_synapse
             ($can_change)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {if_else
                $can_change
                {if_else {modifier_mgr is_modifier_active mod_auto_vocals} ;Disables while in AIM, option only works when Vocals is tied to an active player
@@ -930,6 +993,7 @@
             {static_vocals.chk set checked $static_enabled})
          (update_linking_code
             ($waiting $success $code $profile)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {linking_code_wait.grp set_showing $waiting}
             {linking_code_success.grp
                set_showing
@@ -952,6 +1016,7 @@
                {linking_code.lbl set_linking_code $code}})
          (set_options_signed_in
             ($val)
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}}
             {if_else {modifier_mgr is_modifier_active mod_auto_play}
 			      {options_av_settings.lst disable_data overshell_autosave_enabled}
 			      {if_else
@@ -1163,19 +1228,22 @@
          (set_confirm_actions
             ($msg $options)
             {confirm_question.lbl set text_token $msg}
-            {confirm_action.lst set_data $options})
+            {confirm_action.lst set_data $options}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (set_confirm_message
             ($token)
             {confirm_question.lbl set text_token $token}
             {confirm_action.lst
                set_data
-               (overshell_confirm_ok)})
+               (overshell_confirm_ok)}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (set_confirm_message_fmt
             ($arg)
             {confirm_question.lbl set_token_fmt $arg}
             {confirm_action.lst
                set_data
-               (overshell_confirm_ok)})
+               (overshell_confirm_ok)}
+            {{$this find platform_color.mat} set color {pack_color $dx_menu_color_r $dx_menu_color_g $dx_menu_color_b}})
          (set_difficulty_restriction
             ($difficulty)
             {cond

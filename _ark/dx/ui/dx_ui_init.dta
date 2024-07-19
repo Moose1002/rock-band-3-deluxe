@@ -1,10 +1,20 @@
+#ifndef HX_WII {if {file_exists DX_EVENT_FILE_PATH} {dx_event_dta_reader}} #endif
+
 {unless $dx_only_populate_once_holders
    {set $dx_only_populate_once_holders TRUE}
    {set $dx_current_song {array ()}}
    {set $dx_mtv_holder {array ()}}
    {set $dx_state_tracker {array ()}}
 }
-
+#ifndef HX_WII
+;needs font on wii
+{set $dx_song_select_rings TRUE}
+{set $dx_diff_popups TRUE}
+#endif
+{set $dx_high_score_report TRUE}
+{set $highscore_tracker ()}
+{resize $highscore_tracker 0}
+{set $dx_vsync TRUE}
 #ifdef _SHIP
 DX_LOG_CLEAR
 DX_JSON_CLEAR
@@ -13,6 +23,7 @@ DX_CURRENT_SONG_CLEAR
 {resize $dx_playlist_array 0}
 {write_file DX_PLAYLIST_DTA_PATH $dx_playlist_array}
 #endif
+{set $actually_show_checks TRUE} ;init overshell checkboxes
 {set $dx_play_a_show_active_instruments ()}
 {resize $dx_play_a_show_active_instruments 0}
 ;rb4 loosly
@@ -39,12 +50,25 @@ DX_CURRENT_SONG_CLEAR
 {set $dx_icon_drum_pro "d"}
 {set $dx_current_free_cam "Free camera: off"}
 {set $overshell_showing TRUE}
-{set $dx_forced_song_load_bg FALSE}
-{set $dx_forced_main_menu_bg FALSE}
+{set $dx_forced_outro_vignette FALSE}
+{if_else $dx_event_mode
+   {do
+      {set $dx_sv8_dx_vers TRUE}
+      {set $dx_forced_main_menu_bg ("sv8_a")}
+   }
+   {set $dx_forced_main_menu_bg FALSE}
+}
 {set $dx_forced_song_select_bg FALSE}
 
-{set $dx_confirm_song_count TRUE}
-{set $dx_ash_welcome_msg FALSE}
+{if_else $dx_event_mode
+   {set $dx_confirm_song_count FALSE}
+   {set $dx_confirm_song_count TRUE}
+}
+
+{if_else $dx_event_mode
+   {set $dx_ash_welcome_msg TRUE}
+   {set $dx_ash_welcome_msg FALSE}
+}
 
 {set $dx_time_remaining_on_top TRUE}
 
@@ -64,7 +88,10 @@ DX_CURRENT_SONG_CLEAR
 {set $dx_loading_tip_var FALSE}
 {set $dx_hide_on_countdown off}
 
-{set $dx_you_rock FALSE}
+{if_else $dx_event_mode
+   {set $dx_you_rock TRUE}
+   {set $dx_you_rock FALSE}
+}
 
 {set $dx_trainer_real_guitar FALSE}
 {set $dx_trainer_real_bass FALSE}
@@ -274,9 +301,11 @@ DX_CURRENT_SONG_CLEAR
 ;sets default bre track textures.
 {set $dx_bre none}
 
-;sets default flames track textures.
-;no flames: noflm
-{set $dx_flames none}
+;sets default flares track textures.
+{set $dx_flares none}
+
+;sets default particles track textures.
+{set $dx_particles none}
 
 ;sets default vocal arrow track textures.
 {set $dx_vocal_arrow none}
@@ -304,6 +333,7 @@ DX_CURRENT_SONG_CLEAR
 {set $dx_jurgen_sound FALSE}
 {set $dx_nice_sound TRUE}
 {set $dx_song_select_noise FALSE}
+{set $dx_scroll_sound TRUE}
 {set $dx_instrument_fx TRUE}
 {set $dx_whammy_fx TRUE}
 
@@ -358,9 +388,22 @@ DX_CURRENT_SONG_CLEAR
 
 ;set default volumes for mics
 ;0-11, default is "8"
-{set $mic_vol_1 8}
-{set $mic_vol_2 8}
-{set $mic_vol_3 8}
+{if_else $dx_event_mode
+   {do
+      {set $mic_vol_1 0}
+      {set $mic_vol_2 0}
+      {set $mic_vol_3 0}
+   }
+   {do
+      {set $mic_vol_1 8}
+      {set $mic_vol_2 8}
+      {set $mic_vol_3 8}
+   }
+}
+
+{if $dx_event_mode
+   {set $dx_character_swap TRUE}
+}
 
 ;set default colors for notes
 ;5 is overdrive (white)
@@ -447,10 +490,14 @@ DX_CURRENT_SONG_CLEAR
 ;in game hud
 {set $dx_crowd_meter_state dx_on}
 {set $dx_score_meter_visibility TRUE}
+{set $dx_fail_flash TRUE}
 
 
 ;currentsong formatting defauts
-{set $dx_song_title default}
+{if_else $dx_event_mode
+   {set $dx_song_title always}
+   {set $dx_song_title default}
+}
 {set $dx_song_title_mtv_line TRUE}
 {set $dx_artist_mtv_line TRUE}
 {set $dx_year_on_mtv TRUE}
@@ -461,12 +508,18 @@ DX_CURRENT_SONG_CLEAR
 {set $dx_game_origin_mtv_line FALSE}
 {set $dx_author_mtv_line TRUE}
 {set $dx_song_key_mtv_line FALSE}
-
+{set $dx_stars_needs_reset TRUE}
 ;set controller reassignments
 {set $dx_joypad_type_guitar kControllerGuitar}
 {set $dx_joypad_type_keys kControllerKeys}
 {set $dx_joypad_type_vocals kControllerVocals}
 {set $dx_joypad_pad_mapping joypad}
+
+;mtv overlay position for event mode
+{if $dx_event_mode
+   {set $mtvpos_0 -85}
+   {set $mtvpos_1 150}
+}
 
 ;game hud default ui positioning
 {set $scoreboardpos_0 8} {set $scoreboardpos_1 0} {set $scoreboardpos_2 -16}
@@ -504,8 +557,18 @@ DX_CURRENT_SONG_CLEAR
 {set $dx_fctype both}
 {set $dx_streak_counter single}
 {set $dx_time_remaining down}
-{set $dx_current_intro_movie deluxe}
-{set $dx_splash_screen TRUE}
+{if_else $dx_event_mode
+   {do
+      {set $dx_current_intro_movie off}
+      {set $dx_splash_screen FALSE}
+   }
+   {do
+      {set $dx_current_intro_movie deluxe}
+      {set $dx_splash_screen TRUE}
+   }
+}
+{set $dx_seasonal_logos TRUE}
+{set $dx_season standard}
 {set $dx_additional_parts TRUE}
 
 {set $dx_venue_intro TRUE}
@@ -529,11 +592,19 @@ DX_CURRENT_SONG_CLEAR
 {push_back $dx_tracked_track_themes default}
 #endif
 
+{if $dx_event_mode
+   {modifier_mgr toggle_modifier_enabled mod_nopause}
+}
+
 {set $dx_instrument_icons rb3}
 
-#ifdef _SHIP
-{if {file_exists DX_SETTINGS_FILE_PATH} {dx_settings_dta_reader}}
+{if {file_exists DX_SETTINGS_FILE_PATH}
+   {if {> {size {read_file DX_SETTINGS_FILE_PATH}} 0}
+      {dx_settings_dta_reader}
+   }
+}
 
+#ifdef _SHIP
 {if {file_exists DX_MODIFIER_FILE_PATH} {dx_modifier_dta_reader}}
 
 {if {file_exists DX_VALUES_FILE_PATH} {dx_values_dta_reader}}
@@ -556,6 +627,20 @@ DX_CURRENT_SONG_CLEAR
    }
 }
 #endif
+
+; force vsync on after settings load if not on rpcs3, just in case
+{if {! {== $dx_detected_platform platform_rpcs3}}
+   {set $dx_vsync TRUE}
+   {rnd set_sync 1}
+}
+#ifdef HX_WII
+{set $dx_instrument_icons rb3}
+{set $dx_song_select_rings FALSE}
+{set $dx_diff_popups FALSE}
+{set $dx_author_finder_is_enabled FALSE}
+{set $dx_force_lod FALSE}
+#endif
+
 ;instrument icons, implement individual ones later
 {switch $dx_instrument_icons
    (rb3 
@@ -602,36 +687,15 @@ DX_CURRENT_SONG_CLEAR
 {if $dx_ps3hw
    {set $dx_author_finder_is_enabled FALSE}
 }
+{set $dx_forced_outro_vignette ()}
+{resize $dx_forced_outro_vignette 0}
 
-{if $dx_black_menu
-   {set $dx_forced_song_load_bg (TRUE ())}
-}
-{if $dx_forced_song_load_bg
-   {set_elem {find $syscfg vignettes interstitials preloading_screen #ifdef HX_WII pregame_screen #else game_screen #endif} 1 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials preloading_screen #ifdef HX_WII pregame_screen #else game_screen #endif} 2 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials preloading_screen #ifdef HX_WII pregame_screen #else game_screen #endif} 3 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials preloading_screen #ifdef HX_WII pregame_screen #else game_screen #endif} 4 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials preloading_screen #ifdef HX_WII pregame_screen #else game_screen #endif} 5 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials preloading_screen #ifdef HX_WII pregame_screen #else game_screen #endif} 6 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials meta_loading_outro song_select_screen} 1 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials meta_loading_outro song_select_screen} 2 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials meta_loading_outro song_select_screen} 3 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials meta_loading_outro song_select_screen} 4 $dx_forced_song_load_bg}
-   {set_elem {find $syscfg vignettes interstitials meta_loading_outro song_select_screen} 5 $dx_forced_song_load_bg}
-}
 {if $dx_forced_main_menu_bg
    {set_elem {find $syscfg vignettes backdrops sv3} 1 $dx_forced_main_menu_bg}
 }
 {if $dx_forced_song_select_bg
    {set_elem {find $syscfg vignettes backdrops sv4} 1 $dx_forced_song_select_bg}
 }
-
-#ifdef HX_XBOX
-{if_else {== {sprint $dx_forced_song_load_bg} "(1 ())"}
-   {set $dx_xbox_show_fallback TRUE}
-   {set $dx_xbox_show_fallback FALSE}
-}
-#endif
 
 {switch $dx_fctype
    (ring {set $dx_fc_ring TRUE} {set $dx_fc_glow FALSE})
@@ -754,4 +818,7 @@ DX_CURRENT_SONG_CLEAR
       (dx_play_a_show_chosen_vote)
    )
 }
+#endif
+#ifdef HX_WII
+{set $dx_debug 1}
 #endif

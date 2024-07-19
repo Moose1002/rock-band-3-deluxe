@@ -118,17 +118,24 @@
          {$this show_options}
          {$this attempt_remove_user}})
    (BUTTON_DOWN_MSG
-      {if_else
-         {== $action kAction_Option}
-         {do
-            ($index
-               {chars.lst selected_pos})
-            {if
-               {$this can_edit_character $index}
-               {$this
-                  show_char_edit
-                  {chars.lst selected_pos}}}}
-         kDataUnhandled}))
+      {if_else $dx_event_mode
+         ;disallow character deletion in event mode
+         kDataUnhandled
+         {if_else
+            {== $action kAction_Option}
+            {do
+               ($index
+                  {chars.lst selected_pos})
+               {if
+                  {$this can_edit_character $index}
+                  {$this
+                     show_char_edit
+                     {chars.lst selected_pos}}}}
+            kDataUnhandled
+         }
+      }
+   )
+)
 (kState_ChooseCharDenial
    (view confirm_action)
    (update_view
@@ -673,6 +680,7 @@
          options_in_game
          options})
    (enter
+      {game_options.lst set circular FALSE}
       {if $dx_customizer
          {$this show_state dxState_TextureMenu}
       }
@@ -862,6 +870,8 @@
                {$this show_online_options})
             (overshell_game_options
                {$this show_game_options})
+            (os_event_options
+               {ui push_screen dx_EventModeWelcome_screen})
             (overshell_leave
                {$this attempt_remove_user})
             (overshell_dx_bot_settings
@@ -916,6 +926,7 @@
                kDataUnhandled})
          kDataUnhandled})
    (on_cancel
+      DX_OS_CLOSE_MSG
       {$this leave_options})
    (on_start
       ($user)
@@ -954,6 +965,7 @@
       {switch
          {$component selected_sym}
          (overshell_confirm_yes
+            {world_panel unload}
             {if_else {{$this get_session_mgr} is_local}
                {set $dx_online_temp FALSE}
                {set $dx_online_temp TRUE}
@@ -1258,6 +1270,18 @@
       {$this show_options}))
 (kState_GameOptions
    (view game_options)
+   (enter
+      {set $actually_show_checks TRUE}
+      {handle
+         ($this
+            update_auto_vocals_enabled
+            {modifier_mgr is_modifier_active mod_auto_vocals})}
+      {do
+         ($no_fail_enabled
+            {modifier_mgr is_modifier_active mod_no_fail_band})
+         {handle
+            ($this update_no_fail_enabled $no_fail_enabled)}}
+   )
    (update_view
       {do
          ($controller
@@ -1395,6 +1419,10 @@
    (on_cancel
       {$this show_game_options})
    (enter
+      {if_else {$this in_game}
+         {options_av_settings.lst set_type overshell_menu_ingame}
+         {options_av_settings.lst set_type overshell_menu}
+      }
       {if $dx_customizer
          {$this show_state dxState_AppearanceMenu}
       }
@@ -1532,6 +1560,10 @@
       {if $dx_customizer
          {$this show_state dxState_AppearanceMenu}
       }
+      {if_else {$this in_game}
+         {options_audio.lst set_type overshell_menu_ingame}
+         {options_audio.lst set_type overshell_menu}
+      }
       {$this lst_reset}
       {#ifdef HX_WII options.lst #else options_audio.lst #endif set_selected $audiomenuval}
       {instruments.sld set_num_steps 12}
@@ -1637,6 +1669,10 @@
       }
    )
    (enter
+      {if_else {$this in_game}
+         {options_vocal.lst set_type overshell_menu_ingame}
+         {options_vocal.lst set_type overshell_menu}
+      }
       {static_vocals.chk set_showing 1}
       {synapse.chk set_showing 1}
       {options_vocal.lst set_data
@@ -1856,9 +1892,10 @@
       {$this on_slider_change $component $user}))
 #define DX_OPTIONS_SET_DATA
 (
-   {options_extras.lst set_data 
+   {options_audio.lst set_data 
       (
-         overshell_credits
+         refresh_library
+         {if_else {== {ui current_screen} song_select_screen} report_song_location overshell_credits}
          overshell_linking_code
          #ifdef HX_XBOX overshell_audition #endif
          {if_else {modifier_mgr is_modifier_active mod_auto_play}
@@ -1869,10 +1906,14 @@
    }
 )
 (kState_OptionsExtras
-   (view options_extras)
+   (view options_audio)
    (enter
       DX_OPTIONS_SET_DATA
-      {if {&& {! {session is_in_game}} {session_mgr is_local}}
+      {if_else {$this in_game}
+         {options_audio.lst set_type overshell_menu_ingame}
+         {options_audio.lst set_type overshell_menu}
+       }
+      {if {&& {!= {ui current_screen} song_select_screen} {! {session is_in_game}} {session_mgr is_local}}
          {set $dx_choose_char_scale_x 0.4}
          {set $dx_choose_char_scale_y 0.4}
          {game_options.grp add_object choose_character.mesh}
@@ -1894,6 +1935,17 @@
          {$component selected_sym}
          (overshell_credits
             {$this show_enter_credits})
+         (refresh_library
+            {if {! {session is_in_game}}
+               {content_mgr remove_content kDataUnhandled}
+               {content_mgr start_refresh}
+            }
+         )
+         (report_song_location
+            {if {&& {== {ui current_screen} song_select_screen} {== {{music_library get_highlighted_node} get_node_type} kNodeSong}}
+               {dx_passive_messenger_symbol {symbol {song_mgr song_file_path {{music_library get_highlighted_node} get_token} " "}}}
+            }
+         )
          (overshell_linking_code
             {if_else
                {&&
@@ -1944,7 +1996,7 @@
       }
    )
    (exit
-      {if {&& {! {session is_in_game}} {session_mgr is_local}}
+      {if {&& {!= {ui current_screen} song_select_screen} {! {session is_in_game}} {session_mgr is_local}}
          {restore_choose_char_size_pos}
       }
       {game_options.grp remove_object choose_character.mesh}
@@ -2266,10 +2318,6 @@
       {choose_part.lst set_selected $focus_item}
       DX_UPDATE_ICON)
    (update_view
-      {if_else {$this in_game}
-         {choose_part.lst set_type overshell_part_select_ingame}
-         {choose_part.lst set_type overshell_part_select}
-      }
       {if $dx_in_show_flow
          {options_audio.lst set_type overshell_menu}
          {options_audio.lst restart_highlight_matanim}
@@ -2288,24 +2336,13 @@
          {$this update_part_select_list}
          DX_PART_SELECT_HANDLERS
          {dx_auto_endurance_handler}
-         {if_else {$this in_game}
-            {choose_part.lst set_type overshell_part_select_ingame}
-            {choose_part.lst set_type overshell_part_select}
-         }
          {choose_part.lst restart_highlight_matanim}
          {choose_part.lst refresh}
       }
       DX_UPDATE_ICON
    )
-   (SCROLL_MSG
+   (poll
       DX_UPDATE_ICON
-   )
-   (exit
-      {set $dx_play_a_show_num_votes 0}
-      {set $dx_play_a_show_required_votes 0}
-      {if $dx_prep_show_flow
-         {set $dx_prep_show_flow FALSE}
-      }
    )
    (SELECT_MSG
       {if $dx_in_show_flow
@@ -2479,6 +2516,7 @@
             }
          )
       }
+      {if $dx_in_show_flow {$this show_state kState_ReadyToPlayaShowWait}}
       {if {! $dx_in_show_flow}
          {unless {|| $dx_customizer $dx_auto_endurance}
             ;Saves default instrument by slot number
@@ -2612,17 +2650,35 @@
       {resize $dx_play_a_show_active_instruments 0}
       {if_else $dx_in_show_flow
          {do
-            
-            {set $dx_in_show_flow FALSE}
-            {set $dx_prep_show_flow FALSE}
-            {set $dx_playing_a_show FALSE}
-            {overshell end_override_flow kOverrideFlow_SongSettings TRUE}
-            {ui sync_screen meta_loading_main_screen 0}
+            {$this show_state kState_ConfirmPlayaShowExit}
          }
          {$this leave_choose_part}
       }
    )
 )
+(kState_ConfirmPlayaShowExit
+   (view confirm_action)
+   (prevents_override TRUE)
+   (on_cancel
+      {$this show_state kState_ChoosePart})
+   (update_view
+      {handle
+         ($this
+            set_confirm_actions
+            overshell_confirm_leaveashow
+            (overshell_confirm_yes overshell_confirm_no))})
+   (SELECT_MSG
+      {switch
+         {$component selected_sym}
+         (overshell_confirm_yes
+            {set $dx_in_show_flow FALSE}
+            {set $dx_prep_show_flow FALSE}
+            {set $dx_playing_a_show FALSE}
+            {overshell end_override_flow kOverrideFlow_SongSettings TRUE}
+            {$this leave_options}
+            {ui sync_screen meta_loading_main_screen 0})
+         (overshell_confirm_no
+            {$this show_state kState_ChoosePart})}))
 (kState_ChoosePartDenial
    (view confirm_action)
    (song_settings_flow TRUE)
@@ -2942,6 +2998,14 @@
    (view ready_to_play)
    (song_settings_flow TRUE)
    (ready_to_play TRUE))
+(kState_ReadyToPlayaShowWait
+   (view ready_to_play)
+   (song_settings_flow TRUE)
+   ;(ready_to_play TRUE)
+   (on_cancel
+      {if $votingallowed
+         {set $dx_play_a_show_required_votes {- $dx_play_a_show_required_votes 1}}
+         {$this show_state kState_ChoosePart}}))
 (kState_SongOptionsCancel
    (view cancel_song)
    (song_settings_flow TRUE)
@@ -3278,6 +3342,9 @@
    (view confirm_action)
    (choose_char_flow TRUE)
    (enter
+      {if $dx_event_mode
+         {$this show_chars}
+      }
       {handle
          ($this
             set_confirm_actions

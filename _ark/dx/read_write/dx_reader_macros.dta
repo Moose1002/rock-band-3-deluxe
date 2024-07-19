@@ -131,14 +131,19 @@
          {elem {find $entry dx_sv8_dx_vers} 1}
       }
    }
-   {if {== {elem $entry 0} {basename dx_forced_song_load_bg}}
-      {set $dx_forced_song_load_bg
-         {elem {find $entry dx_forced_song_load_bg} 1}
+   {if {== {elem $entry 0} {basename dx_forced_outro_vignette}}
+      {set $dx_forced_outro_vignette
+         {elem {find $entry dx_forced_outro_vignette} 1}
       }
    }
    {if {== {elem $entry 0} {basename emulate_fps}}
       {set $emulatefps
          {elem {find $entry emulate_fps} 1}
+      }
+   }
+   {if {== {elem $entry 0} {basename dx_vsync}}
+      {set $dx_vsync
+         {elem {find $entry dx_vsync} 1}
       }
    }
    {if {== {elem $entry 0} {basename track_speed}}
@@ -221,6 +226,11 @@
    ;      {elem {find $entry dx_nice_sound} 1}
    ;   }
    ;}
+   {if {== {elem $entry 0} {basename dx_scroll_sound}}
+      {set $dx_scroll_sound
+         {elem {find $entry dx_scroll_sound} 1}
+      }
+   }
    {if {== {elem $entry 0} {basename dx_song_select_noise}}
       {set $dx_song_select_noise
          {elem {find $entry dx_song_select_noise} 1}
@@ -234,6 +244,11 @@
    {if {== {elem $entry 0} {basename dx_instrument_fx}}
       {set $dx_instrument_fx
          {elem {find $entry dx_instrument_fx} 1}
+      }
+   }
+   {if {== {elem $entry 0} {basename dx_fail_flash}}
+      {set $dx_fail_flash
+         {elem {find $entry dx_fail_flash} 1}
       }
    }
    {if {== {elem $entry 0} {basename dx_year_on_mtv}}
@@ -294,6 +309,16 @@
    {if {== {elem $entry 0} {basename dx_countdown_enabled}}
       {set $dx_countdown_enabled
          {elem {find $entry dx_countdown_enabled} 1}
+      }
+   }
+   {if {== {elem $entry 0} {basename dx_song_select_rings}}
+      {set $dx_song_select_rings
+         {elem {find $entry dx_song_select_rings} 1}
+      }
+   }
+   {if {== {elem $entry 0} {basename dx_high_score_report}}
+      {set $dx_high_score_report
+         {elem {find $entry dx_high_score_report} 1}
       }
    }
    {if {== {elem $entry 0} {basename dx_hide_on_countdown}}
@@ -464,6 +489,11 @@
    {if {== {elem $entry 0} {basename dx_od_ready_popups}}
       {set $dx_od_ready_popups
          {elem {find $entry dx_od_ready_popups} 1}
+      }
+   }
+   {if {== {elem $entry 0} {basename dx_diff_popups}}
+      {set $dx_diff_popups
+         {elem {find $entry dx_diff_popups} 1}
       }
    }
    {if {== {elem $entry 0} {basename dx_force_remote_vox}}
@@ -901,9 +931,14 @@
          {elem {find $entry strikeline} 1}
       }
    }
-   {if {== {elem $entry 0} {basename flames}}
-      {set $dx_flames
-         {elem {find $entry flames} 1}
+   {if {== {elem $entry 0} {basename flares}}
+      {set $dx_flares
+         {elem {find $entry flares} 1}
+      }
+   }
+   {if {== {elem $entry 0} {basename particles}}
+      {set $dx_particles
+         {elem {find $entry particles} 1}
       }
    }
    {if {== {elem $entry 0} {basename sustains}}
@@ -1058,6 +1093,41 @@
    {if {== {elem $entry 0} {basename default_diff3}}
       {set $default_diff3
          {elem {find $entry default_diff3} 1}
+      }
+   }
+)
+#define LOADING_EVENT_OPTIONS
+(
+   {if {== {elem $entry 0} {basename dx_event_mode}}
+      {set $dx_event_mode
+         {elem {find $entry dx_event_mode} 1}
+      }
+   }
+   {if $dx_event_mode
+      {if {== {elem $entry 0} {basename dx_event_name}}
+         {set $dx_event_name
+            {elem {find $entry dx_event_name} 1}
+         }
+      }
+      {if {== {elem $entry 0} {basename dx_event_passcode}}
+         {set $dx_event_passcode
+            {elem {find $entry dx_event_passcode} 1}
+         }
+      }
+      {if {== {elem $entry 0} {basename dx_event_logo_path}}
+         {set $dx_event_logo_path
+            {elem {find $entry dx_event_logo_path} 1}
+         }
+      }
+      {if {== {elem $entry 0} {basename dx_event_type}}
+         {set $dx_event_type
+            {elem {find $entry dx_event_type} 1}
+         }
+      }
+      {if {== {elem $entry 0} {basename dx_event_service}}
+         {set $dx_event_service
+            {elem {find $entry dx_event_service} 1}
+         }
       }
    }
 )

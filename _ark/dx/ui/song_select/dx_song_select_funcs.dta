@@ -10,9 +10,13 @@
    {if {! $dx_prep_show_flow}
       {set $dx_playing_a_show FALSE}
    }
-   {if $dx_prep_show_flow
-      {dx_modal_messenger dx_play_a_show_intro}
+   #ifdef HX_WII
+   {unless $dx_event_mode
+      {if $dx_prep_show_flow
+         {dx_modal_messenger dx_play_a_show_intro}
+      }
    }
+   #endif
    {switch {{$this get_user} get_controller_type}
       (kControllerGuitar {set $dx_tracked_trainer FALSE})
       (kControllerDrum {set $dx_tracked_trainer drum})
@@ -29,10 +33,11 @@
       {unless $rb3e_checked_song_count
          {set $rb3e_checked_song_count TRUE}
          {if {> {{song_select_panel find song.lst} num_data} $high_song_count}
-            {dx_modal_messenger_symbol 'High song counts, especially with multiple players, have been known to cause instability issues after prolonged play-time. It is recommended to:\nStick to music video venues\nTurn off song transition cutscenes\nAvoid very long, 10 min+ songs\nOr lower your song count\nYou have been warned.\n\nTo disable this warning go to Deluxe Settings > Advanced > Functional Options > High Song Count Warning'}
+            {dx_modal_messenger_symbol high_song_count_warn}
          }
       }
    }
+   {$this dx_diff_maker}
    ;{unless $gocentral_sanity_checked
    ;   {if {&& {! {session_mgr is_local}} {< {{song_select_panel find song.lst} num_data} 130}}
    ;      {set $gocentral_sanity_checked TRUE}
@@ -44,10 +49,47 @@
    dx_song_select_endurance
    {if {|| $dx_customizer $dx_auto_endurance}
       {script_task kTaskSeconds
-         (delay {if_else $dx_auto_endurance 1.5 0})
+         (delay {if_else {== $dx_auto_endurance dx_selected} 1.5 0})
          (script
-            {gamemode set_mode qp_coop}
-            {music_library select_highlighted_node {input_mgr get_user}}
+            {if_else {== $dx_auto_endurance dx_random}
+               {script_task kTaskSeconds
+                  (delay 2)
+                  (script
+                     {song.lst refresh}
+                     {song.lst set_selected_simulate_scroll {random_int 0 {song.lst num_data}}}
+                     {script_task kTaskSeconds
+                        (delay 2)
+                        (script
+                           {song.lst refresh}
+                           {song.lst set_selected_simulate_scroll {random_int 0 {song.lst num_data}}}
+                           {script_task kTaskSeconds
+                              (delay 2)
+                              (script
+                                 {song.lst refresh}
+                                 {song.lst set_selected_simulate_scroll {random_int 0 {song.lst num_data}}}
+                                 {script_task kTaskSeconds
+                                    (delay 2)
+                                    (script
+                                       {if_else {== {{music_library get_highlighted_node} get_node_type} kNodeSong}
+                                          {do
+                                             {gamemode set_mode qp_coop}
+                                             {music_library select_highlighted_node {input_mgr get_user}}
+                                          }
+                                          {dx_song_select_endurance}
+                                       }
+                                    )
+                                 }
+                              )
+                           }
+                        )
+                     }
+                  )
+               }
+               {do
+                  {gamemode set_mode qp_coop}
+                  {music_library select_highlighted_node {input_mgr get_user}}
+               }
+            }
          )
       }
    }
@@ -61,7 +103,10 @@
    {unless
       [waiting_for_sort]
       {song.lst set_scroll_user $user}
-      {song.lst scroll -10}}) ; dx scroll the list up by 10 slots when pressing left dpad
+      {song.lst set_selected_simulate_scroll {- {song.lst selected_pos} 1}}
+      {set $pause_scroll_sound TRUE}
+      {song.lst set_selected_simulate_scroll {- {song.lst selected_pos} 9}}
+      {set $pause_scroll_sound FALSE}}) ; dx scroll the list up by 10 slots when pressing left dpad
 )
 #define DX_SONG_LIST_RIGHT_ACTION
 (
@@ -72,5 +117,8 @@
    {unless
       [waiting_for_sort]
       {song.lst set_scroll_user $user}
-      {song.lst scroll 10}}) ; dx scroll the list down by 10 slots when pressing right dpad
+      {song.lst set_selected_simulate_scroll {+ {song.lst selected_pos} 1}}
+      {set $pause_scroll_sound TRUE}
+      {song.lst set_selected_simulate_scroll {+ {song.lst selected_pos} 9}}
+      {set $pause_scroll_sound FALSE}}) ; dx scroll the list down by 10 slots when pressing right dpad
 )

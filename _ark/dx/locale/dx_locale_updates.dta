@@ -18,7 +18,7 @@
    "Continue")
 (debug_mode_enabled_modal
 	"Debug Mode is now enabled!\n\nAt the very bottom of 'Deluxe Settings', you will now find 'Debug Settings'.\n\nDo not touch anything in there unless you know what you're doing or you were told to.\n\nDebug Mode can be disabled from there as well.")
-
+(report_song_location "report song location")
 (cal_audio_desc_drum
    "This test determines the amount of Audio Latency in your system. Every time you hear a tick, hit the green pad.")
 (cal_audio_desc_guitar
@@ -35,7 +35,8 @@
 (cal_audio_desc_pad
    "This test determines the amount of Audio Latency in your system. Every time you hear a tick, press the A button.")
 #endif
-
+(dx_track_speed_locked "Track Speed menu cannot be entered online.")
+(dx_track_speed_desc "Breakneck Speed is equivalent to 150% Track Speed")
 ;server stuff
 ;ashcentral
 (ash_overshell_register_online "Play on AshCentral")
@@ -246,6 +247,27 @@
 (video_07
    "Music Video 7")
 
+(dx_freeplay "Free Play")
+(dx_freeplay_desc "\qFree Play\q mode:\nJump in, choose a song, and start playing right away!")
+(dx_play_a_show_desc "\qPlay a Show\q mode:\nGive the crowd an opener, then the band votes on songs to construct a setlist!")
+
+(os_event_options "Event Options")
+
+(dx_event_mode_welcome_msg "Welcome to Event Mode!\n\nCertain things have been disabled and changed to optimize the experience for parties and public events.\n\nWhat'll it be tonight?\n\n")
+(dx_event_set_party "Party or Get-together")
+(dx_event_set_club "Club, Bar, Arcade, Kiosk, etc.")
+(dx_event_set_convention "Convention or On-Stage Event")
+(dx_event_mode_disable "[Disable Event Mode]")
+
+(dx_event_club_lbl "Rock Band 3 Deluxe is a fan-made mod of Rock Band 3.\nCheck us out at rb3dx.milohax.org\nor in our Discord server at discord.gg/milohax")
+(dx_welcome_to "Welcome to ")
+(dx_event_convention_lbl "!\n\nRock Band 3 Deluxe is a fan-made mod of Rock Band 3.\nCheck us out at rb3dx.milohax.org\nor in our Discord server at discord.gg/milohax")
+
+
+(dx_you_rock_msg "You Rock!")
+(dx_you_rock_club_msg "You Rock,\n")
+(dx_you_rock_convention_msg "Thanks for playing,\n")
+
 ;new overshell
 (os_blnk " ")
 ;additional extras
@@ -283,11 +305,22 @@
 (os_fastermode_on "Acceleration Mode: ON")
 (os_fastermode_off "Acceleration Mode: OFF")
 (os_max_speed "- Max Speed: %d% +")
+(os_song_rings_on "Song Select Diff: Rings")
+(os_song_rings_off "Song Select Diff: Dots")
+(os_song_rings_on_desc "Use YARG style rings on song select")
+(os_song_rings_off_desc "Use Vanilla dots on song select")
+
+(os_high_score_on "Report Solo Highscore: ON")
+(os_high_score_off "Report Solo Highscore: OFF")
+(os_high_score_on_desc "Notify when you beat your saved score in single player")
+(os_high_score_off_desc "Notify when you beat your saved score in single player")
+(high_song_count_warn "High song counts, especially with multiple players, have been known to cause instability issues after prolonged play-time. It is recommended to:\nStick to music video venues\nTurn off song transition cutscenes\nAvoid very long, 10 min+ songs\nOr lower your song count\nYou have been warned.\n\nTo disable this warning go to Deluxe Settings > Advanced > Functional Options > High Song Count Warning")
 ;venue options
 (os_menu_backgrounds "Menu Backgrounds...")
 (os_menu_backgrounds_desc "Change the visual backgrounds for the menus")
 (os_venue "Select Venue...")
 (os_venue_desc "Choose where to rock or focus up with no venue")
+(os_venue_desc_report "Current Selected Venue:\n%s")
 (os_venue_intro_on "Venue Intro: ON")
 (os_venue_intro_on_desc "Plays the establishing shot before the song starts")
 (os_venue_intro_off "Venue Intro: OFF")
@@ -318,11 +351,16 @@
 ;track theme
 (leave_customizer "[Leave Customizer]")
 (realtime_customize "[Enter Customizer]")
+(restart_customizer "[Restart Song]")
 ;graphics
 (os_venuefps_60 "Venue FPS: 60")
 (os_venuefps_60_desc "Increases the venue FPS to 60 (not recommended on console)")
 (os_venuefps_30 "Venue FPS: 30")
 (os_venuefps_30_desc "Locks the venue FPS to 30 (vanilla)")
+(os_vsync_on "VSYNC: ON")
+(os_vsync_on_desc "VSYNC is currently on (vanilla)")
+(os_vsync_off "VSYNC: OFF")
+(os_vsync_off_desc "VSYNC is currently off (that's crazy)")
 (60fps_warning "WARNING\n\n60FPS venues are NOT RECOMMENDED on console!")
 (os_force_high_lod_on "Detail Level: High")
 (os_force_high_lod_on_desc "Forces the highest level of detail for characters (not recommended on console)")
@@ -366,6 +404,10 @@
 (os_audio_ambience_on_desc "Toggles background ambience in the music library")
 (os_audio_ambience_off "Menu Ambience: OFF")
 (os_audio_ambience_off_desc "Toggles background ambience in the music library")
+(os_scroll_sound_on "Scrolling Feedback: ON")
+(os_scroll_sound_on_desc "Toggles sound effect when scrolling on UI Lists")
+(os_scroll_sound_off "Scrolling Feedback: OFF")
+(os_scroll_sound_off_desc "Toggles background ambience in the music library")
 (os_whammy_fx_on "Whammy SFX: ON")
 (os_whammy_fx_on_desc "Toggles the pitch bending effect when using the whammy bar on guitar and bass")
 (os_whammy_fx_off "Whammy SFX: OFF")
@@ -415,7 +457,11 @@
 (os_vis_off "Crowd Meter: HIDDEN")
 (os_vis_off_desc "Hide the crowd meter")
 (os_vis_disabled "Crowd Meter: DISABLED")
-(os_vis_disabled_desc "Hide and disable the crowd meter, turns off the low health warning but breaks things like crowd sing-alongs")
+(os_vis_disabled_desc "Hide and disable the crowd meter, enabling crowd sing-alongs on at all times")
+(os_fail_flash_on "Fail Flash: On")
+(os_fail_flash_on_desc "Track will repeatedly flash red when performing poorly")
+(os_fail_flash_off "Fail Flash: Off")
+(os_fail_flash_off_desc "Track will not flash red when performing poorly")
 (os_score "Score & Stars...")
 (os_solo_box_pos "Solo Box...")
 (os_solo_box_pos_desc "Placement of the Solo Box")
@@ -445,6 +491,10 @@
 (os_od_ready_on_desc "Shows an \qOverdrive Ready!\q pop-up when overdrive is ready to deploy, similar to Guitar Hero and YARG")
 (os_od_ready_off "\qOverdrive Ready!\q Pop-Ups: OFF")
 (os_od_ready_off_desc "Don't display \qOverdrive Ready!\q pop-ups")
+(os_diff_on "Difficulty Pop-Ups: ON")
+(os_diff_on_desc "Shows the difficulty of the song for each instrument when the song starts, similar to RB4")
+(os_diff_off "Difficulty Pop-Ups: OFF")
+(os_diff_off_desc "Don't show the difficulty of the song for each instrument when the song starts")
 (os_countdown_on "Countdown: ON")
 (os_countdown_on_desc "Shows measure countdowns during long breaks, similar to Clone Hero and Rock Band 4")
 (os_countdown_off "Countdown: OFF")
@@ -658,6 +708,7 @@
 (hint_career_desc
    "Welcome to the Rock Band 3 Deluxe Career!\n\nYour progress as a musician is measured by goals. As you get better at a particular instrument, you'll beat more goals for that instrument. Beating goals is a big deal; goals can give you more fans, more clothing, and even better transportation to travel around in!")
 (vocal_parts_0 "No Vocals")
+(by_recent "Source")
 (overshell_rb3esettings "Deluxe Settings")
 (trackspeed_msg "NOTE SPEED: %d%%")
 (speed_msg "SONG SPEED: %d%%")
@@ -805,7 +856,8 @@
 (os_cam_desc "Adjust Post Processing or other aspects of the 3D scene")
 (os_theme "Track Theme")
 (os_theme_desc "Personalize how the track looks with custom textures")
-(os_flames "Flames")
+(os_flares "Flares")
+(os_particles "Particles")
 (os_voxhw "Vocal Highway")
 (os_voxnotes "Vocal Notes")
 (os_voxod "Vocal Overdrive")
@@ -1422,7 +1474,8 @@
 (overshell_dx_bot_settings "Autoplay Settings")
 (os_dx_bot_skill "Accuracy")
 (os_dx_auto_endgame_on "Auto Next: Yes")
-(os_auto_endurance_on "Auto Song: Yes")
+(os_auto_endurance_selected "Auto Song: Selection")
+(os_auto_endurance_random "Auto Song: Random")
 (os_dx_bot_1_on "Player 1: Yes")
 (os_dx_bot_2_on "Player 2: Yes")
 (os_dx_bot_3_on "Player 3: Yes")
@@ -4542,11 +4595,15 @@
 (mod_force_hopos_desc "Makes every note a HOPO")
 (mod_mirror_mode_desc "Lefty mode without being a lefty!")
 (mod_color_shuffle_desc "Randomizes the colors of gems!")
+(mod_gem_shuffle_desc "Completely random notes!")
 (os_reboot "Reboot Game")
 (os_reboot_desc "Completely reboot Rock Band 3 Deluxe.")
 (reboot_warning "Are you sure you want to reboot the game?")
 #endif
-
+(overshell_reboot "Reboot Game")
+(reboot_theme_warning_rb3e "Default theme wont load properly until game reboot if you have already played a song.\nReboot now?")
+(reboot_theme_warning "Default theme wont load properly until game reboot if you have already played a song.\n Reboot Suggested")
+(refresh_library "Refresh Library")
 (os_button_remapper "Pad Button Remap")
 (os_button_remapper_desc "Remap in game buttons for pad play")
 (mapped_button_0 "L2/LT")
@@ -4565,12 +4622,15 @@
 (mapped_button_13 "Dpad Right")
 (mapped_button_14 "Dpad Down")
 (mapped_button_15 "Dpad Left")
+(localize_it "Hello! ¡Hola! Bonjour! Hallo! Ciao!\nDo you speak another language?\nWant to help translate Deluxe text to your native language?\nJoin the MiloHax discord to help join the fight against English oppressors!\nRock Band 3 supported languages: Spanish, French, German, Italian.")
 (dx_play_a_show_welcome
    "Welcome to Play a Show!")
 (dx_play_a_show
    "Play a Show")
 (dx_play_a_show_info
    "Vote on which songs to play!\nVoting ends when all players have voted!")
+(play_a_show_welcome_text
+   "Welcome to Play a Show!\nGrab your axe and give the crowd a great opener!")
 (dx_play_a_show_setlist_count
    "\nSetlist: %i Song")
 (dx_play_a_show_setlist_counts
@@ -4617,9 +4677,14 @@
    "A song with a woman as the vocalist")
 (play_a_show_community
    "A song from the community")
+(overshell_confirm_leaveashow
+   "Are you sure you want to leave Play a Show?\nYour setlist will be lost!")
 (dx_play_a_show_intro
-   "Welcome to DX Play a Show!\n\nBegin by picking the opener song for your setlist.\nAfter the opener, your band will vote together,\ncrafting your setlist from a series of options.\n\nPro-Tip: Now is your chance to set filters via the [Select] button.")
-
+   "Welcome to Play a Show!\n\nBegin by picking the opener song for your setlist.\nAfter the opener, your band will vote together,\ncrafting your setlist from a series of options.\n\nPro-Tip: Now is your chance to set filters via the [Select] button.")
+(meta_now_playing
+   "<alt>Now Playing:</alt> %s")
+(press_to_play
+   "Press <alt>o</alt> to %s")
 (play_one "vote 1")
 (play_two "vote 2")
 (play_three "vote 3")
@@ -4645,6 +4710,8 @@
 (dx_overdrive_report "%.02f%%")
 (dx_setlist_infinite "The Infinite Setlist")
 (dx_setlist_infinite_desc "You've played the endless setlists, now play all 3 back to back in this absolute gauntlet of a set.")
+(setlist_rb1endless_desc "You can now play The Endless Setlist. Our prayers are with you.")
+(setlist_rb2endless_desc "Are you getting tired of how exceedingly awesome you are? Looking for a REAL challenge? How about ALL THE SONGS IN THE FREAKING GAME IN A ROW WITH NO BREAKS? Try the Endless Setlist II today, but don't forget to take a nap and hit the bathroom first!!!")
 ;ALWAYS KEEP THIS LAST SO IT LOADS ON TOP OF EVERYTHING ELSE
 ;user added locale strings
 #include dx_locale_sources.dta

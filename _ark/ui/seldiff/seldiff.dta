@@ -25,7 +25,7 @@
          {career.grp add_object play_prep_text.lbl}
       }
       {career.grp set_showing TRUE}
-      {play_prep_text.lbl set text_token {sprint "Welcome to Play a Show!\nGrab your axe and give the crowd a great opener!"}}
+      {play_prep_text.lbl set text_token play_a_show_welcome_text}
    )
    (enter
       {tour.grp set_showing FALSE}
@@ -113,15 +113,32 @@
       {coming_up.lbl set text_token coming_up}
       {song_preview.lbl set_song_and_artist_name_from_sym $song $index}
       {if_else
-         {!
-            {==
-               $album_art
-               ""}}
-         {album_art.pic set tex_file $album_art}
+         #ifdef HX_PS3
+         {file_exists {sprint "songs/updates/" $song "/gen/" $song "_keep.png_ps3"}}
+         #endif
+         #ifdef HX_XBOX
+         {file_exists {sprint "songs/updates/" $song "/gen/" $song "_keep.png_xbox"}}
+         #endif
+         #ifdef HX_WII
+         {file_exists {sprint "songs/updates/" $song "/gen/" $song "_keep.png_wii"}}
+         #endif
          {album_art.pic
             set
             tex_file
-            "ui/image/blank_album_art_keep.png"}})
+            {sprint "songs/updates/" $song "/" $song "_keep.png"}}
+         {if_else
+            {!
+               {==
+                  $album_art
+                  ""}}
+            {album_art.pic set tex_file $album_art}
+            {album_art.pic
+               set
+               tex_file
+               "ui/image/blank_album_art_keep.png"}
+         }
+      }
+   )
    (update_auto_vocals_label
       ($num_players $auto_vocals_enabled $is_local)
       {cond
@@ -146,16 +163,8 @@
       {career.pic set tex_file "dx/custom_textures/_additional_textures/acc_dx_hourglass_keep.png"}
       {song_preview.lbl set_token_fmt dx_play_a_show_welcome}
       {tour.grp set_showing FALSE}
-      {career.grp set_showing TRUE}
       {battle.grp set_showing FALSE}
       {$this dx_generate_lines_info}
-      {$this dx_play_info}
-      {$this dx_play_set_count}
-      {$this dx_play_header}
-      {if {! $gotthislabelpreview}
-         {set $gotthislabelpreview {song_preview.lbl get_local_pos_index 2}}
-      }
-      {song_preview.lbl set_local_pos_index 2 {- $gotthislabelpreview 15}}
    )
    (update_tour_setlist_label
       ($filter $song_count)
@@ -207,15 +216,31 @@
       {song_preview.lbl set_song_and_artist_name_from_sym $song $index}
       {career.pic set tex_file "dx/custom_textures/_additional_textures/acc_dx_hourglass_keep.png"}
       {if_else
-         {!
-            {==
-               $album_art
-               ""}}
-         {album_art.pic set tex_file $album_art}
+         #ifdef HX_PS3
+         {file_exists {sprint "songs/updates/" $song "/gen/" $song "_keep.png_ps3"}}
+         #endif
+         #ifdef HX_XBOX
+         {file_exists {sprint "songs/updates/" $song "/gen/" $song "_keep.png_xbox"}}
+         #endif
+         #ifdef HX_WII
+         {file_exists {sprint "songs/updates/" $song "/gen/" $song "_keep.png_wii"}}
+         #endif
          {album_art.pic
             set
             tex_file
-            "ui/image/blank_album_art_keep.png"}})
+            {sprint "songs/updates/" $song "/" $song "_keep.png"}}
+         {if_else
+            {!
+               {==
+                  $album_art
+                  ""}}
+            {album_art.pic set tex_file $album_art}
+            {album_art.pic
+               set
+               tex_file
+               "ui/image/blank_album_art_keep.png"}
+         }
+      })
    (update_auto_vocals_label
       ($num_players $auto_vocals_enabled $is_local)
       {7_player.grp set_showing FALSE}
@@ -236,7 +261,6 @@
          {if
             {overshell in_override_flow kOverrideFlow_None}
             {overshell begin_override_flow kOverrideFlow_SongSettings}}}
-      {dx_play_a_show_panel dx_play_countdown}
       {dx_play_a_show_panel hold_up}
       {{dx_play_a_show_panel find song_preview.lbl} set_token_fmt dx_play_a_show_welcome}
       {play_header.lbl set text_token {sprint " "}}
