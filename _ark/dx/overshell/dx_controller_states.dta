@@ -1,4 +1,3 @@
-{push_back $dx_settings_main
    (dxState_ControllerMenu
       (view
          {if_else 
@@ -44,9 +43,7 @@
       )
       (cancel {dx_state dxState_DeluxeSettings})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SlotOptions
       (view
          os_reset_everything
@@ -98,9 +95,7 @@
          #endif
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_AllowedInstruments
       (view
          os_allowed_instruments_normal
@@ -112,9 +107,7 @@
       )
       (cancel {dx_state dxState_SlotOptions})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_Slots
       (view
          os_slot1
@@ -130,7 +123,6 @@
       )
       (cancel {dx_state dxState_AllowedInstruments})
    )
-}
 
 
 #define DX_APPLY_SLOT_OPTIONS
@@ -164,7 +156,7 @@
    {set $dx_slot_options_changed TRUE}
    {dx_state dxState_Slots}
 )
-{push_back $dx_settings_main
+
    (dxState_AllowedInstrumentsForSlot
       (view
          os_allow_all
@@ -188,9 +180,7 @@
       )
       (cancel {dx_state dxState_Slots})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_PadMappingSwap
       (view
          os_pad
@@ -211,9 +201,7 @@
       )
       (cancel {dx_state dxState_ControllerMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_InstrumentSwapGuitar
       (view keys drums vocals)
       (message os_instrumentswap_menu_guitar_desc)
@@ -245,9 +233,7 @@
       )
       (cancel {dx_state dxState_ControllerMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_InstrumentSwapKeys
       (view guitar drums vocals)
       (message os_instrumentswap_menu_keys_desc)
@@ -282,8 +268,7 @@
       )
       (cancel {dx_state dxState_ControllerMenu})
    )
-}
-{push_back $dx_settings_main
+
    (dxState_InstrumentSwapVocals
       (view guitar keys drums)
       (message os_instrumentswap_menu_vocals_desc)
@@ -315,7 +300,6 @@
       )
       (cancel {dx_state dxState_ControllerMenu})
    )
-}
 
 ;#define kPad_L2
 ;(0)
@@ -359,7 +343,6 @@
 ;{set_elem {find $syscfg beatmatcher controller joypad slots} 8 3}
 ;{set_elem {find $syscfg beatmatcher controller joypad slots} 9 kPad_Circle}
 ;{set_elem {find $syscfg beatmatcher controller joypad slots} 10 4}
-{push_back $dx_settings_main
    (dxState_ButtonRemapper
       (view
          {if_else {&& $dx_list_item_selected {!= $dx_list_pos 0}} os_blnk os_reset}
@@ -383,7 +366,7 @@
       )
       (enter
          {do
-            ($arr {find $dx_settings_main $this_state view})
+            ($arr {find $syscfg dx_settings $this_state view})
             ($data {array 0})
             {foreach $entry $arr
                {if {!= $entry view}
@@ -480,4 +463,3 @@
          (kAction_Right LIST_BUTTON_REMAP_DIREC)
       )
    )
-}

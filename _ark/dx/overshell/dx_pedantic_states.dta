@@ -1,4 +1,3 @@
-{push_back $dx_settings_main
    (dxState_WhoCares
       (view
          os_song_timerprogress
@@ -32,16 +31,12 @@
       )
       (cancel {dx_state dxState_Advanced})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SongProgress
       (view
          ;song timer/progress
          os_song_timer
-         #ifndef HX_WII
          os_song_progress
-         #endif
       )
       (select
          (os_song_timer {dx_state dxState_SongTimerElements})
@@ -49,29 +44,25 @@
       )
       (cancel {dx_state dxState_WhoCares})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SongTimerElements
       (view
          {if_else {== $dx_time_remaining_direction off} os_time_remaining_disable 0}
          {if_else {== $dx_time_remaining_direction down} os_time_remaining_down 0}
          {if_else {== $dx_time_remaining_direction up} os_time_remaining_up 0}
          {if_else $dx_disp_total_time os_total_time_on os_total_time_off}
-         {if_else $dx_time_remaining_pos_top os_time_remaining_top_on os_time_remaining_top_off}
+         ;{if_else $dx_time_remaining_pos_top os_time_remaining_top_on os_time_remaining_top_off}
       )
       (select
          (os_time_remaining_disable {set $dx_time_remaining_direction down})
          (os_time_remaining_down {set $dx_time_remaining_direction up})
          (os_time_remaining_up {set $dx_time_remaining_direction off})
-         (os_time_remaining_top {set $dx_time_remaining_pos_top {! $dx_time_remaining_pos_top}})
+         ;(os_time_remaining_top {set $dx_time_remaining_pos_top {! $dx_time_remaining_pos_top}})
          (os_total_time {set $dx_disp_total_time {! $dx_disp_total_time}})
       )
       (cancel {dx_state dxState_SongProgress})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_ProgressBarElements
       (view
          {if_else $dx_song_progress_bar os_bar_time_on os_bar_time_off}
@@ -89,9 +80,7 @@
       )
       (cancel {dx_state dxState_SongProgress})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_FullCombo
       (view
          #ifdef HX_WII
@@ -143,4 +132,3 @@
       )
       (cancel {dx_state dxState_WhoCares})
    )
-}

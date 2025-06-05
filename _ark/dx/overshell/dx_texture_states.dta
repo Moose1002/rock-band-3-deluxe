@@ -1,4 +1,3 @@
-{push_back $dx_settings_main
    (dxState_HighwayTheme
       (view
          #ifndef HX_WII
@@ -20,9 +19,7 @@
       )
       (cancel {dx_state dxState_TextureMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_HighwayThemeSurfaces
       (view
          os_fretboard
@@ -68,15 +65,13 @@
       )
       (cancel {dx_state dxState_HighwayTheme})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_HighwayThemeGems
       (view
          os_gems
-         ;#ifndef HX_WII
-         ;os_gem_models
-         ;#endif
+         #ifndef HX_WII
+         os_gem_models
+         #endif
          os_smashers
          os_hits
          os_beat_lines
@@ -135,9 +130,7 @@
       )
       (cancel {dx_state dxState_HighwayTheme})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_HighwayThemeHits
       (view
          os_flares
@@ -172,9 +165,7 @@
       )
       (cancel {dx_state dxState_HighwayThemeGems})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_HighwayPlayerStats
       (view
          os_highway_text
@@ -213,9 +204,7 @@
       )
       (cancel {dx_state dxState_HighwayTheme})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_HudTheme
       (view
          os_mtv
@@ -272,9 +261,7 @@
       )
       (cancel {dx_state dxState_TextureMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_VocalTheme
       (view
          os_voxhw
@@ -318,9 +305,7 @@
       )
       (cancel {dx_state dxState_TextureMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_MenuThemer
       (view
          os_menu_theme
@@ -353,10 +338,7 @@
       )
       (cancel {dx_state dxState_TextureMenu})
    )
-}
 
-
-{push_back $dx_settings_main
    (dxState_TextureMenu
       (view
          {if_else $dx_customizer
@@ -458,7 +440,7 @@
          {set $dx_track_to_reset_choose_character_texture TRUE}
       )
    )
-}
+
 #define SCROLL_TEXTURE_SETTER
 (
    ;Action when a scroll action is performed on the list
@@ -528,7 +510,6 @@
       }
    } ;load selected texture into tex memory
 )
-{push_back $dx_settings_main
    (dxState_DTATextureLoader
       (view
          os_blank
@@ -890,9 +871,7 @@
          }
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_InstrumentTextureChooser
       (message none)
       (view
@@ -1012,9 +991,7 @@
          {dx_state dxState_TextureMenu}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_ShadingMenu
       (view
          {if_else $dx_highway_bass_shading os_dx_hw_bass_shade_on os_dx_hw_bass_shade_off}
@@ -1038,9 +1015,7 @@
       )
       (cancel {dx_state dxState_HighwayThemeSurfaces})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_DTAModelLoader
       (view
          os_blnk
@@ -1075,4 +1050,3 @@
       )
       (cancel {dx_state dxState_HighwayThemeGems})
    )
-}

@@ -4,24 +4,52 @@
 
 ; Vanilla text modifications
 #ifdef HX_PS3
-(accomplishment_launch_wrong_instrument "Non puoi iniziare l'obiettivo perché non si possono salvare i progressi della Carriera con lo strumento richiesto. Devi abbandonare la sessione e accedervi di nuovo con tale strumento per salvare i progressi della Carriera.")
+(accomplishment_launch_wrong_instrument
+   "Non puoi iniziare l'obiettivo perché non si possono salvare i progressi della Carriera con lo strumento richiesto. Devi abbandonare la sessione e accedervi di nuovo con tale strumento per salvare i progressi della Carriera."
+)
 #endif
-(audition_main_loaded_song_error "Stato del brano: errore durante la convalida!")
-(audition_main_loaded_song_loaded "Stato del brano: brano pronto per l'audizione.")
-(audition_main_loaded_song_none "Stato del brano: in attesa di trasferimento...")
-(audition_main_loaded_song_success "Stato del brano: dati del brano validi.")
-(audition_main_loaded_song_transfer_fmt "Stato del brano: %.0f%% trasferito...")
-(audition_main_loaded_song_validating "Stato del brano: convalida dei dati del brano in corso...")
+(audition_main_loaded_song_error
+   "Stato del brano: errore durante la convalida!"
+)
+(audition_main_loaded_song_loaded
+   "Stato del brano: brano pronto per l'audizione."
+)
+(audition_main_loaded_song_none
+   "Stato del brano: in attesa di trasferimento..."
+)
+(audition_main_loaded_song_success
+   "Stato del brano: dati del brano validi."
+)
+(audition_main_loaded_song_transfer_fmt
+   "Stato del brano: %.0f%% trasferito..."
+)
+(audition_main_loaded_song_validating
+   "Stato del brano: convalida dei dati del brano in corso..."
+)
 (audition_main_network_idling "Stato della rete: inattivo...")
-(audition_main_network_transfer_error "Stato della rete: errore di trasferimento, recupero in corso...")
-(audition_main_network_transferring "Stato della rete: trasferimento in corso...")
+(audition_main_network_transfer_error
+   "Stato della rete: errore di trasferimento, recupero in corso..."
+)
+(audition_main_network_transferring
+   "Stato della rete: trasferimento in corso..."
+)
 (audition_main_song_ready "Brano caricato")
 (audition_main_title "Modalità audizione")
-(audition_main_validating_failed "I dati del brano trasferiti non sono validi.  Tornerai al menu principale.")
-(audition_main_welcome "Per sottoporre i tuoi brani a un'audizione, devi avviare MAGMA sul PC in uso. Se non possiedi ancora MAGMA, lo puoi scaricare da http://creators.rockband.com.")
-(audition_no_club_found "Per accedere alla modalità Audizione, devi essere connesso con un profilo giocatore abilitato a Xbox LIVE che sia membro del XNA Creators Club e connesso a Xbox LIVE.")
-(audition_no_hard_drive_found "Nessun disco rigido Xbox 360 rilevato. Per la modalità Audizione è necessario il disco rigido Xbox 360.")
-(audition_no_rock_central "La modalità Audizione necessita di una connessione ai server di gioco Rock Central, non disponibili al momento.  Riprova più tardi.")
+(audition_main_validating_failed
+   "I dati del brano trasferiti non sono validi.  Tornerai al menu principale."
+)
+(audition_main_welcome
+   "Per sottoporre i tuoi brani a un'audizione, devi avviare MAGMA sul PC in uso. Se non possiedi ancora MAGMA, lo puoi scaricare da http://creators.rockband.com."
+)
+(audition_no_club_found
+   "Per accedere alla modalità Audizione, devi essere connesso con un profilo giocatore abilitato a Xbox LIVE che sia membro del XNA Creators Club e connesso a Xbox LIVE."
+)
+(audition_no_hard_drive_found
+   "Nessun disco rigido Xbox 360 rilevato. Per la modalità Audizione è necessario il disco rigido Xbox 360."
+)
+(audition_no_rock_central
+   "La modalità Audizione necessita di una connessione ai server di gioco Rock Central, non disponibili al momento.  Riprova più tardi."
+)
 (audition_option_disabled "Disattivata")
 (audition_option_empty_venue "Locale vuoto")
 (audition_option_enabled "Attivata")
@@ -44,14 +72,22 @@
 (audition_time_display_section "Sezione")
 (audition_time_display_string_format "%s")
 (bad_review_showing "Mostra canzoni con accendino")
-(error_club_member_signed_out "Il profilo giocatore il cui abbonamento al XNA Creators Club è stato utilizzato per accedere alla modalità Audizione si è disconnesso.")
-(overshell_audition_denial_remote_players "Non puoi sottoporre i tuoi brani a un'audizione mentre suoni in una sessione di Xbox LIVE.")
-(overshell_enter_audition "Accedere all'Audizione? I progressi non salvati andranno persi.")
+(error_club_member_signed_out
+   "Il profilo giocatore il cui abbonamento al XNA Creators Club è stato utilizzato per accedere alla modalità Audizione si è disconnesso."
+)
+(overshell_audition_denial_remote_players
+   "Non puoi sottoporre i tuoi brani a un'audizione mentre suoni in una sessione di Xbox LIVE."
+)
+(overshell_enter_audition
+   "Accedere all'Audizione? I progressi non salvati andranno persi."
+)
 (the1920s "Canzoni anni '20")
 (the1930s "Canzoni anni '30")
 (the1940s "Canzoni anni '40")
 (the1950s "Canzoni anni '50")
-(token_redemption_error "Si è verificato un errore durante l'utilizzo del buono. Riprova più tardi.")
+(token_redemption_error
+   "Si è verificato un errore durante l'utilizzo del buono. Riprova più tardi."
+)
 (prc_ugc_section_10_0 "0% - 10%")
 (prc_ugc_section_10_10 "10% - 20%")
 (prc_ugc_section_10_20 "20% - 30%")
@@ -88,7 +124,9 @@
 (prc_ugc_section_5_90 "90% - 95%")
 (prc_ugc_section_5_95 "95% - 100%")
 (setlist_desc_vk_desc "Immetti la descrizione della tua scaletta.")
-(ugc_not_allowed_in_trainers "Le lezioni non sono disponibili come brani del Rock Band Network")
+(ugc_not_allowed_in_trainers
+   "Le lezioni non sono disponibili come brani del Rock Band Network"
+)
 
 #include ../../../dx/locale/dx_version.dta
 

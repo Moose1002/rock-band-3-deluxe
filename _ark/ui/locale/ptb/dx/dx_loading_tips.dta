@@ -1,5 +1,4 @@
-#define DX_LOADING_TIPS
-(
+#define DX_LOADING_TIPS (
    (
       (
          "Use o novo menu \qOpções Deluxe\q para escolher o quão rápido você quer que as notas venham na pista - ou o quão rápido você quer que a música toque!"
@@ -138,9 +137,9 @@
          "Se seu baterista for do tipo que atrasa muito, lembre-se que uma Drum Machine nunca se atrasaria."
          "Toque sua música e faça o mundo inteiro ouví-la, afinal, todos nós pagamos contas no final do mês."
          #ifdef HX_XBOX
-         #ifndef RB3E
-         "Tente usar o mod RB3Enhanced, ele funciona com o Deluxe!"
-         #endif
+            #ifndef RB3E
+            "Tente usar o mod RB3Enhanced, ele funciona com o Deluxe!"
+            #endif
          #endif
          "Estas notas pequenas que você vê na guitarra/baixo são Hammer-Ons & Pull-Offs. Você não precisa palhetar para tocar elas."
          "Use o Botão de Efeitos para personalizar o som da sua guitarra durante os solos."

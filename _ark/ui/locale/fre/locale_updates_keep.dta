@@ -36,24 +36,52 @@
 
 ; Vanilla text modifications
 #ifdef HX_PS3
-(accomplishment_launch_wrong_instrument "Tu ne peux pas commencer cet objectif car l'instrument requis n'est pas sauvegardé dans la progression de la carrière. Pour commencer à sauvegarder dans la progression de la carrière, l'instrument requis doit quitter puis se connecter de nouveau à cette session.")
+(accomplishment_launch_wrong_instrument
+   "Tu ne peux pas commencer cet objectif car l'instrument requis n'est pas sauvegardé dans la progression de la carrière. Pour commencer à sauvegarder dans la progression de la carrière, l'instrument requis doit quitter puis se connecter de nouveau à cette session."
+)
 #endif
-(audition_main_loaded_song_error "État de la chanson : erreur lors de la validation !")
-(audition_main_loaded_song_loaded "État de la chanson : chanson prête à être essayée.")
-(audition_main_loaded_song_none "État de la chanson : en attente de transfert...")
-(audition_main_loaded_song_success "État de la chanson : données de la chanson valides.")
-(audition_main_loaded_song_transfer_fmt "État de la chanson : %.0f%% transféré...")
-(audition_main_loaded_song_validating "État de la chanson : validation des données de la chanson...")
+(audition_main_loaded_song_error
+   "État de la chanson : erreur lors de la validation !"
+)
+(audition_main_loaded_song_loaded
+   "État de la chanson : chanson prête à être essayée."
+)
+(audition_main_loaded_song_none
+   "État de la chanson : en attente de transfert..."
+)
+(audition_main_loaded_song_success
+   "État de la chanson : données de la chanson valides."
+)
+(audition_main_loaded_song_transfer_fmt
+   "État de la chanson : %.0f%% transféré..."
+)
+(audition_main_loaded_song_validating
+   "État de la chanson : validation des données de la chanson..."
+)
 (audition_main_network_idling "État du réseau : inactif...")
-(audition_main_network_transfer_error "État du réseau : erreur de transfert, récupération en cours...")
-(audition_main_network_transferring "État du réseau : transfert en cours...")
+(audition_main_network_transfer_error
+   "État du réseau : erreur de transfert, récupération en cours..."
+)
+(audition_main_network_transferring
+   "État du réseau : transfert en cours..."
+)
 (audition_main_song_ready "Chanson chargée")
 (audition_main_title "Mode Audition")
-(audition_main_validating_failed "Les données transférées de la chanson ne sont pas valides.  Tu vas maintenant être renvoyé vers le menu principal.")
-(audition_main_welcome "Pour faire des essais sur tes chansons, tu dois lancer MAGMA sur ton PC. Si tu ne disposes pas encore de MAGMA, tu peux le télécharger sur http://creators.rockband.com.")
-(audition_no_club_found "Pour accéder au mode Audition, tu dois utiliser un profil du joueur Xbox LIVE membre du XNA Creators Club et être connecté à Xbox LIVE.")
-(audition_no_hard_drive_found "Disque dur Xbox 360 non détecté. Le mode Audition nécessite un disque dur Xbox 360.")
-(audition_no_rock_central "Le mode Audition nécessite une connexion aux serveurs de jeu Rock Central, indisponible à l'heure actuelle. Réessaie ultérieurement.")
+(audition_main_validating_failed
+   "Les données transférées de la chanson ne sont pas valides.  Tu vas maintenant être renvoyé vers le menu principal."
+)
+(audition_main_welcome
+   "Pour faire des essais sur tes chansons, tu dois lancer MAGMA sur ton PC. Si tu ne disposes pas encore de MAGMA, tu peux le télécharger sur http://creators.rockband.com."
+)
+(audition_no_club_found
+   "Pour accéder au mode Audition, tu dois utiliser un profil du joueur Xbox LIVE membre du XNA Creators Club et être connecté à Xbox LIVE."
+)
+(audition_no_hard_drive_found
+   "Disque dur Xbox 360 non détecté. Le mode Audition nécessite un disque dur Xbox 360."
+)
+(audition_no_rock_central
+   "Le mode Audition nécessite une connexion aux serveurs de jeu Rock Central, indisponible à l'heure actuelle. Réessaie ultérieurement."
+)
 (audition_option_disabled "Désactivée")
 (audition_option_empty_venue "Salle vide")
 (audition_option_enabled "Activée")
@@ -76,9 +104,15 @@
 (audition_time_display_section "Section")
 (audition_time_display_string_format "%s")
 (bad_review_showing "Chansons à 1 briquet")
-(error_club_member_signed_out "Le profil du joueur dont l'abonnement au XNA Creators Club a été utilisé pour accéder au mode Audition a été déconnecté.")
-(overshell_audition_denial_remote_players "Désolé, tu ne peux pas passer d’audition quand tu joues une session Xbox LIVE.")
-(overshell_enter_audition "Participer à l'audition ? Toute progression non sauvegardée sera perdue.")
+(error_club_member_signed_out
+   "Le profil du joueur dont l'abonnement au XNA Creators Club a été utilisé pour accéder au mode Audition a été déconnecté."
+)
+(overshell_audition_denial_remote_players
+   "Désolé, tu ne peux pas passer d’audition quand tu joues une session Xbox LIVE."
+)
+(overshell_enter_audition
+   "Participer à l'audition ? Toute progression non sauvegardée sera perdue."
+)
 (prc_ugc_section_10_0 "0% - 10%")
 (prc_ugc_section_10_10 "10% - 20%")
 (prc_ugc_section_10_20 "20% - 30%")
@@ -119,18 +153,36 @@
 (the1930s "Années 30")
 (the1940s "Années 40")
 (the1950s "Années 50")
-(token_redemption_error "Une erreur est survenue lors de l'obtention de ton bon. Réessaie ultérieurement.")
-(ugc_not_allowed_in_trainers "Les leçons ne sont pas disponibles pour les chansons du Réseau Rock Band.")
+(token_redemption_error
+   "Une erreur est survenue lors de l'obtention de ton bon. Réessaie ultérieurement."
+)
+(ugc_not_allowed_in_trainers
+   "Les leçons ne sont pas disponibles pour les chansons du Réseau Rock Band."
+)
 (vocal_parts_0 "Pas de chant")
 
 ; Warnings
-(author_warning "Ce mode a été fait à l'intention des auteurs des pistes musicales. Combinez cela avec les manettes RPCS3 pour utiliser le mode Tous Instruments.")
-(autoplay_warning "Ce mode a été fait à l'intention des auteurs pour faire la démonstration des pistes musicales. La sauvegarde sont désactivés si il est activé.")
-(breakneck_warning "Veuiller désactiver les modifications de la vitesse folles avant d'activer celui-là.")
-(chmode_warning "Le Mode Clone Hero change la fenêtre d'action pour être plus indulgent. Les sauvegardes sont désactivés et un message va être ajouté à la fin si vous l'activez.")
-(ingame_warning "Ces réglages ne marche pas en jeu. Veuillez utiliser les options dans le menu \qingame settings\q.")
-(os_kColorWarn "Ces sélections des couleurs n'affecte pas le Clavier PRO, seuleument au clavier de base.")
-(settings_warning "Un dx.dta fichier existe déjà. Vous devez supprimer le premier avant de sauvagarder les règlages.")
+(author_warning
+   "Ce mode a été fait à l'intention des auteurs des pistes musicales. Combinez cela avec les manettes RPCS3 pour utiliser le mode Tous Instruments."
+)
+(autoplay_warning
+   "Ce mode a été fait à l'intention des auteurs pour faire la démonstration des pistes musicales. La sauvegarde sont désactivés si il est activé."
+)
+(breakneck_warning
+   "Veuiller désactiver les modifications de la vitesse folles avant d'activer celui-là."
+)
+(chmode_warning
+   "Le Mode Clone Hero change la fenêtre d'action pour être plus indulgent. Les sauvegardes sont désactivés et un message va être ajouté à la fin si vous l'activez."
+)
+(ingame_warning
+   "Ces réglages ne marche pas en jeu. Veuillez utiliser les options dans le menu \qingame settings\q."
+)
+(os_kColorWarn
+   "Ces sélections des couleurs n'affecte pas le Clavier PRO, seuleument au clavier de base."
+)
+(settings_warning
+   "Un dx.dta fichier existe déjà. Vous devez supprimer le premier avant de sauvagarder les règlages."
+)
 
 #include ../../../dx/locale/dx_version.dta
 

@@ -1,4 +1,3 @@
-{push_back $dx_settings_main
    (dxState_InGameFeatures
       (view
          os_lyric_display
@@ -14,9 +13,7 @@
       )
       (cancel {dx_state dxState_DeluxeSettings})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_LyricDisplay
       (view
          {if_else $dx_lyric_display_enabled os_lyric_display_on os_lyric_display_off}
@@ -31,9 +28,7 @@
       )
       (cancel {dx_state dxState_InGameFeatures})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_BandInfo
       (view
          ;crowd meter
@@ -90,9 +85,7 @@
       )
       (cancel {dx_state dxState_InGameFeatures})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_InGameHUD
       (view
          ;solo box position
@@ -117,9 +110,7 @@
       )
       (cancel {dx_state dxState_HudTheme})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_OnlineFeatures
       (view
          {if_else $dx_dim_remote_players os_dim_remote_players_on os_dim_remote_players_off}
@@ -136,10 +127,7 @@
       )
       (cancel {dx_state dxState_InGameFeatures})
    )
-}
 
-
-{push_back $dx_settings_main
    (dxState_TrackPopups
       (view
          {if_else $dx_note_streak_popups os_note_streak_on os_note_streak_off}
@@ -163,9 +151,7 @@
       )
       (cancel {dx_state dxState_HighwayPlayerStats})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_MTVElements
       (view
          {if_else {== $dx_mtv_visibility always} os_mtv_vis_always 0}
@@ -222,9 +208,7 @@
       )
       (cancel {dx_state dxState_HudTheme})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_CurrentSongSetup
       (view
          {if_else $dx_mtv_line_artist os_artist_on os_artist_off}
@@ -264,9 +248,7 @@
       )
       (cancel {dx_state dxState_MTVElements})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_ScreenElements_Practice
       (view
          os_all_item
@@ -294,9 +276,7 @@
       )
       (cancel {dx_state dxState_InGameHUD})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackHighwayText
       (view
          os_highway_username
@@ -327,9 +307,7 @@
       )
       (cancel {dx_state dxState_HighwayPlayerStats})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackPerfects
       (view
          {if_else $dx_perfects_indicator os_perfects_indicator_on os_perfects_indicator_off}
@@ -350,9 +328,7 @@
       )
       (cancel {dx_state dxState_InGameFeatures})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackHighwayUsername
       (view
          {if_else $dx_track_username os_highway_username_on os_highway_username_off}
@@ -399,9 +375,7 @@
       )
       (cancel {dx_state dxState_TrackHighwayText})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackHighwayOverdrive
       (view
          {if_else $dx_track_overdrive os_highway_overdrive_on os_highway_overdrive_off}
@@ -435,9 +409,7 @@
       )
       (cancel {dx_state dxState_TrackHighwayText})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackHighwayStreak
       (view
          {if_else $dx_track_streak os_highway_streak_on os_highway_streak_off}
@@ -480,9 +452,7 @@
       )
       (cancel {dx_state dxState_TrackHighwayText})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_LabelOptions
       (view
          {if_else {&& $dx_list_item_selected {!= $dx_list_pos 0}} os_blnk os_reset}
@@ -632,7 +602,7 @@
          {set $dx_font_array (default gangly hamilton monospace_numbers_shadow pentatonic pentatonic_bold pentatonic_boldsmall pentatonic_display pentatonic_outline pentatonic_regularcond pentatonic_regularsmall pentatonic_mononumerals rats relay_black stainless stainless_ext_blk stainless_ext_reg)}
          DX_TRANSLATE_LABEL_VARIABLES_TO_LOCAL
          {do
-            ($arr {find $dx_settings_main $this_state view})
+            ($arr {find $syscfg dx_settings $this_state view})
             ($data {array 0})
             {foreach $entry $arr
                {if {!= $entry view}
@@ -744,9 +714,7 @@
          (kAction_Right LIST_LABEL_DIREC)
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackConfig
       (view
          {if_else {&& $dx_list_item_selected {!= $dx_list_pos 0}} os_blnk os_reset}
@@ -770,7 +738,7 @@
          {set $dx_pos_interval_list (0.01 0.1 0.5 1 5 10 50 100)}
          {set $dx_pos_current_interval {elem $dx_pos_interval_list $dx_pos_remapper_array_number}} ;1 unit
          {do
-            ($arr {find $dx_settings_main $this_state view})
+            ($arr {find $syscfg dx_settings $this_state view})
             ($data {array 0})
             {foreach $entry $arr
                {if {!= $entry view}
@@ -867,4 +835,3 @@
          (kAction_Right LIST_TRACK_DIREC)
       )
    )
-}

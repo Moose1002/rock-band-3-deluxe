@@ -246,7 +246,7 @@
       }
       {set $this_state $state}
       ;get list items from state array
-      {foreach $entry {find $dx_settings_main $this_state view}
+      {foreach $entry {find $syscfg dx_settings $this_state view}
          ;view gets included so don't add it to the list
          {if {&& $entry {!= {sprint $entry} "view"}}
             ;generate this list array
@@ -412,15 +412,15 @@
       {dx_close_msg}
       {dx_open_msg {sprint {$current_list selected_sym} "_desc"}}
    }
-   {if {find_exists $dx_settings_main $state enter}
-      {foreach $entry {find $dx_settings_main $state enter}
+   {if {find_exists $syscfg dx_settings $state enter}
+      {foreach $entry {find $syscfg dx_settings $state enter}
          {if {&& $entry {!= {sprint $entry} "enter"}}
             {eval $entry}
          }
       }
    }
-   {if {find_exists $dx_settings_main $state message}
-      {foreach $entry {find $dx_settings_main $state message}
+   {if {find_exists $syscfg dx_settings $state message}
+      {foreach $entry {find $syscfg dx_settings $state message}
          {if {&& $entry {!= {sprint $entry} "message"}}
             {if_else {== {sprint $entry} "none"}
                {dx_close_msg}

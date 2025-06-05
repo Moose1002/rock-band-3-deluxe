@@ -6,9 +6,24 @@
                {beatmatch foreach_active_player $player
                   {if {!= {$player instrument} vocals}
                      {do
-                        ($od {if_else $dx_mtvup {get_player_od $player} 0})
-                        {dx_calc_overdrive $dx_od_ready_popups $player {{$player get_user} get_slot_num} $od}
-                        {dx_show_user_overdrive $dx_track_overdrive $player {{$player get_user} get_slot_num} $od}
+                        ($od
+                           {if_else $dx_mtvup
+                              {get_player_od $player}
+                              0
+                           }
+                        )
+                        {dx_calc_overdrive
+                           $dx_od_ready_popups
+                           $player
+                           {{$player get_user} get_slot_num}
+                           $od
+                        }
+                        {dx_show_user_overdrive
+                           $dx_track_overdrive
+                           $player
+                           {{$player get_user} get_slot_num}
+                           $od
+                        }
                      }
                   }
                }
@@ -17,12 +32,7 @@
       }
       {unless {gamemode in_mode trainer}
          {thread_task kTaskBeats
-            (script
-               {dx_new_set_song_progress $dx_song_progress_bar}
-               {dx_fix_new_song_progress_pos}
-               {dx_set_scoreboard_pos}
-               {dx_set_star_display_pos}
-            )
+            (script {dx_set_scoreboard_pos} {dx_set_star_display_pos})
          }
       }
       {unless {gamemode in_mode trainer}
@@ -35,77 +45,72 @@
       }
       ;{coop_track_panel dx_set_star_display_pos}
       #ifdef HX_WII
-      {unless
-         $stagekit
-         {handle
-            (game quarterbeat)}}
+      {unless $stagekit
+         {handle (game quarterbeat)}
+      }
       #else
-      {if_else
-         $stagekit
+      {if_else $stagekit
          {stagekit_left_right kStageSweepLeft_fast kStageSweepRight_fast}
-         {handle
-            (game quarterbeat)}}
-      #endif)
+         {handle (game quarterbeat)}
+      }
+      #endif
+   )
    (eighth_note
       #ifndef HX_WII
-      {if
-         $stagekit
-         {stagekit_left_right kStageSweepLeft_medium kStageSweepRight_medium}}
-      #endif)
+      {if $stagekit
+         {stagekit_left_right kStageSweepLeft_medium kStageSweepRight_medium}
+      }
+      #endif
+   )
    (beat
       {if {modifier_mgr is_modifier_active mod_auto_play}
          {beatmatch foreach_active_player $player
             {if {== {$player instrument} vocals}
-               {{{{{get_track_panel} find vocals} find vocals_mics} find arrow_1.mesh} set_showing FALSE}
-               {{{{{get_track_panel} find vocals} find vocals_mics} find arrow_2.mesh} set_showing FALSE}
-               {{{{{get_track_panel} find vocals} find vocals_mics} find arrow_3.mesh} set_showing FALSE}
-               {{{{{get_track_panel} find vocals} find vocals_mics} find label.lbl} set_showing FALSE}
+               {{{{{get_track_panel} find vocals} find vocals_mics} find arrow_1.mesh} set_showing
+                  FALSE
+               }
+               {{{{{get_track_panel} find vocals} find vocals_mics} find arrow_2.mesh} set_showing
+                  FALSE
+               }
+               {{{{{get_track_panel} find vocals} find vocals_mics} find arrow_3.mesh} set_showing
+                  FALSE
+               }
+               {{{{{get_track_panel} find vocals} find vocals_mics} find label.lbl} set_showing
+                  FALSE
+               }
             }
          }
       }
       {dx_update_and_hide_guitar_fx}
-      {if {&& $dx_refresh_beatmatch $dx_customizer} {coop_track_panel track_texture_reset_handler} {color_me_milo_lite}}
+      {if {&& $dx_refresh_beatmatch $dx_customizer}
+         {coop_track_panel track_texture_reset_handler}
+         {color_me_milo_lite}
+      }
       {unless {gamemode in_mode trainer}
-         {thread_task kTaskBeats
-            (script
-               {dx_bpm_fetcher $dx_mtv_line_bpm}
-            )
-         }
+         {thread_task kTaskBeats (script {dx_bpm_fetcher $dx_mtv_line_bpm})}
       }
       {unless {gamemode in_mode trainer}
          {thread_task kTaskBeats
-            (script
-               {dx_bot_overdrive_depletor}
-               {dx_drum_overdrive_deployer}
-            )
+            (script {dx_bot_overdrive_depletor} {dx_drum_overdrive_deployer})
          }
       }
       {unless {gamemode in_mode trainer}
-         {thread_task kTaskBeats
-            (script
-               DX_COUNTDOWN_TRACKER
-            )
-         }
+         {thread_task kTaskBeats (script DX_COUNTDOWN_TRACKER)}
       }
       {unless {gamemode in_mode trainer}
-         {thread_task kTaskBeats
-            (script
-               {dx_update_gold_flash}
-            )
-         }
+         {thread_task kTaskBeats (script {dx_update_gold_flash})}
       }
       #ifdef HX_WII
-      {unless
-         $stagekit
-         {handle
-            (game beat)}}
+      {unless $stagekit
+         {handle (game beat)}
+      }
       #else
-      {if_else
-         $stagekit
+      {if_else $stagekit
          {stagekit_left_right kStageSweepLeft_slow kStageSweepRight_slow}
-         {handle
-            (game beat)}}
-      #endif)
+         {handle (game beat)}
+      }
+      #endif
+   )
    (downbeat
       ; {unless {gamemode in_mode trainer}
       ;    {thread_task kTaskBeats
@@ -114,34 +119,31 @@
       ;       )
       ;    }
       ; }
-      {unless
-         $stagekit
-         {handle
-            (game downbeat)}})
-   (reset))
-#define DX_ROLL_INTERVAL_COMMON
-(
+      {unless $stagekit
+         {handle (game downbeat)}
+      }
+   )
+   (reset)
+)
+#define DX_ROLL_INTERVAL_COMMON (
    {get_lane_interval 0 FALSE}
    {get_lane_interval 0 FALSE}
    {get_lane_interval 165 FALSE}
    {get_lane_interval 165 FALSE}
 )
-#define DX_ROLL_INTERVAL_COMMON_PRO
-(
+#define DX_ROLL_INTERVAL_COMMON_PRO (
    {get_lane_interval 0 TRUE}
    {get_lane_interval 0 TRUE}
    {get_lane_interval 165 TRUE}
    {get_lane_interval 165 TRUE}
 )
-#define DX_TRILL_INTERVAL_COMMON
-(
+#define DX_TRILL_INTERVAL_COMMON (
    {get_trill_interval 0 FALSE}
    {get_trill_interval 0 FALSE}
    {get_trill_interval 160 FALSE}
    {get_trill_interval 160 FALSE}
 )
-#define DX_TRILL_INTERVAL_COMMON_PRO
-(
+#define DX_TRILL_INTERVAL_COMMON_PRO (
    {get_trill_interval 0 TRUE}
    {get_trill_interval 0 TRUE}
    {get_trill_interval 160 TRUE}
@@ -152,9 +154,9 @@
       {if_else {modifier_mgr is_modifier_active mod_precision}
          50 ;precision mode, gh3/ch style
          {if_else {modifier_mgr is_modifier_active mod_calibration}
-         15 ;really strict window, great for calibrating
+            15 ;really strict window, great for calibrating
             {if_else {modifier_mgr is_modifier_active mod_chmode}
-            750 ;whale pussy mode
+               750 ;whale pussy mode
                {if_else {<= $speedmod 1.0}
                   100 ;if 100% or less, use stock 100ms window (which is proportional)
                   {* 100 $speedmod} ;if speedup, compensate for song speed in the note window
@@ -166,60 +168,50 @@
    (cheat_error 0)
    (autoplay_accuracy
       {switch $dx_bot_skill
-         (0 50)      ; 1 / 2
-         (1 80)      ; 1 / 5 
-         (2 90)      ; 1 / 10
-         (3 95)      ; 1 / 20
-         (4 96.666)  ; 1 / 30
-         (5 98)      ; 1 / 50
-         (6 99)      ; 1 / 100
-         (7 99.6)    ; 1 / 250
-         (8 99.8)    ; 1 / 500
-         (9 99.9)    ; 1 / 1000
-         (10 99.96)  ; 1 / 2500
-         (11 100)    ; 1 / infinity
+         (0 50) ; 1 / 2
+         (1 80) ; 1 / 5 
+         (2 90) ; 1 / 10
+         (3 95) ; 1 / 20
+         (4 96.666) ; 1 / 30
+         (5 98) ; 1 / 50
+         (6 99) ; 1 / 100
+         (7 99.6) ; 1 / 250
+         (8 99.8) ; 1 / 500
+         (9 99.9) ; 1 / 1000
+         (10 99.96) ; 1 / 2500
+         (11 100) ; 1 / infinity
       }
    )
    (pitch_bend_range 1)
    (ms_to_full_pitch_bend 1000)
    (cymbal_autoplay_ms 0)
-   (trill_interval_ms 
-         (DX_TRILL_INTERVAL_COMMON_PRO))
+   (trill_interval_ms (DX_TRILL_INTERVAL_COMMON_PRO))
    (keyboard_miss_window_ms 200)
    (real_guitar_miss_window_ms 200)
    (keyboard_fat_finger_window_ms 100)
    (roll_interval_ms
       (drum
-         (single_lane
-            (DX_ROLL_INTERVAL_COMMON))
+         (single_lane (DX_ROLL_INTERVAL_COMMON))
          (double_lane
-            (
-               {get_lane_interval 0 FALSE}
+            ({get_lane_interval 0 FALSE}
                {get_lane_interval 0 FALSE}
                {get_lane_interval 255 FALSE}
                {get_lane_interval 255 FALSE}
             )
          )
       )
-      (guitar
-         (DX_ROLL_INTERVAL_COMMON))
-      (bass
-         (DX_ROLL_INTERVAL_COMMON))
-      (real_guitar
-         (DX_ROLL_INTERVAL_COMMON_PRO))
-      (real_guitar_22
-         (DX_ROLL_INTERVAL_COMMON_PRO))
-      (real_bass
-         (DX_ROLL_INTERVAL_COMMON_PRO))
-      (real_bass_22
-         (DX_ROLL_INTERVAL_COMMON_PRO))
-      (real_keys
-         (DX_ROLL_INTERVAL_COMMON_PRO))))
+      (guitar (DX_ROLL_INTERVAL_COMMON))
+      (bass (DX_ROLL_INTERVAL_COMMON))
+      (real_guitar (DX_ROLL_INTERVAL_COMMON_PRO))
+      (real_guitar_22 (DX_ROLL_INTERVAL_COMMON_PRO))
+      (real_bass (DX_ROLL_INTERVAL_COMMON_PRO))
+      (real_bass_22 (DX_ROLL_INTERVAL_COMMON_PRO))
+      (real_keys (DX_ROLL_INTERVAL_COMMON_PRO))
+   )
+)
 (parser
-   (drum_style_instruments
-      (kAudioDrums))
-   (vocal_style_instruments
-      (kAudioVocals))
+   (drum_style_instruments (kAudioDrums))
+   (vocal_style_instruments (kAudioVocals))
    (keyboard_range_shift_duration_ms 200)
    (player_slot 9)
    (track_mapping
@@ -253,8 +245,7 @@
    (background_attenuation 1.5)
    (cue_attenuation 0.0)
    (remote_attenuation 1.5)
-   (drum_velocity_to_db
-      (0.0 -13.0 -7.0 -3.0 -2.0 -0.5 0.0))
+   (drum_velocity_to_db (0.0 -13.0 -7.0 -3.0 -2.0 -0.5 0.0))
    #ifdef HX_WII
    (drum_sample_attenuation -12.0)
    #endif
@@ -265,5 +256,6 @@
    (auto_miss_sound_timeout_seconds 5.0)
    (auto_miss_sound_timeout_gems 5)
    (auto_miss_sound_timeout_gems_remote 10)
-   #include drum_mixes.dta)
+   #include drum_mixes.dta
+)
 #merge ../../../system/run/config/beatmatch.dta

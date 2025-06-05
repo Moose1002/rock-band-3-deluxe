@@ -1,4 +1,3 @@
-{push_back $dx_settings_main
    (dxState_VenueOptions
       (view
          os_menu_backgrounds
@@ -19,9 +18,7 @@
          {dx_state dxState_DeluxeSettings}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_VenueOptionsEXT
       (view
          {if_else {== $dx_venue none} 0 {if_else $dx_venue_intro os_venue_intro_on os_venue_intro_off}}
@@ -50,10 +47,7 @@
          {dx_state dxState_VenueOptions}
       )
    )
-}
 
-
-{push_back $dx_settings_main
    (dxState_SelectVenue
       (view
          none random small_venues big_venues
@@ -128,8 +122,7 @@
       )
       (cancel {dx_state dxState_VenueOptions})
    )
-}
-{push_back $dx_settings_main
+
    (dxState_Graphics
       (view
          {if_else $dx_venue_lights os_venue_lights_on os_venue_lights_off}
@@ -186,9 +179,7 @@
          {dx_state dxState_VenueOptions}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_AdvancedGraphics
       (view
          {if_else $dx_vsync os_vsync_on os_vsync_off}
@@ -219,9 +210,7 @@
          {dx_state dxState_Graphics}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_GraphicsPostProc
       (view
          {if_else $dx_postfx os_postfx_on os_postfx_off}
@@ -276,8 +265,6 @@
          {dx_state dxState_Graphics}
       )
    )
-}
-
 
 #define DX_DEFAULT_MAIN_BG
 (
@@ -303,7 +290,6 @@
       }
    }
 )
-{push_back $dx_settings_main
    (dxState_MenuBG
       (view
          {if_else $dx_black_menu os_nobg_off os_nobg_on}
@@ -442,8 +428,7 @@
          }
       )
    )
-}
-{push_back $dx_settings_main
+
    ;sv2_a - record player
    ;sv3_a - street walk
    ;sv3_b - desert
@@ -589,8 +574,7 @@
          }
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_MainMenuBG
       (view
          default none shuffle_all sv4_array sv7_array
@@ -699,8 +683,7 @@
          }
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_PracticeBG
       (view
          default none shuffle_all sv4_array sv7_array
@@ -803,7 +786,6 @@
          }
          {dx_state dxState_MenuBG})
    )
-}
 ;tv1_a - music to record
 ;tv3_a - to song, "Show tonight" hanging fliers
 ;tv3_b - to song, plug into amp
@@ -819,7 +801,6 @@
 ;tv5_a - packing bags
 ;tv6_a - back alley keep out
 ;tv11_a - taxi cab
-{push_back $dx_settings_main
    (dxState_SongLoadBG
       (view
          default none shuffle_all song_transitions
@@ -985,4 +966,3 @@
          }
       )
    )
-}

@@ -24,60 +24,55 @@
    ;   {sprintf "Executed dx_setting_saver - time: %.4fms"
          {time
             {unless {modifier_mgr is_modifier_active mod_fakejuke}
-               {set $found_elem FALSE}
                ;{unless {|| {== $value none} {! $value}}
                   {switch $category
                      (dx_modifiers
-                        {foreach $entry $dx_modifiers
-                           {if {== {elem $entry 0} {basename $name}}
-                              {remove_elem {find $dx_modifiers $name} {elem {find $dx_modifiers $name} 1}}
-                              {push_back {find $dx_modifiers $name} ($name $value)}
-                              {set $found_elem TRUE}
-                           }
+                        {do
+                           ($out {array 0})
+                           ($hold {array 0})
+                           {push_back $out {eval $name}}
+                           {push_back $hold {eval $name}}
+                           {push_back $hold {eval $value}}
+                           {push_back $out {eval $hold}}
+                           {push_back $dx_modifiers {eval $out}}
+                           {set $dx_modifiers {array $dx_modifiers}}
                         }
-                        {unless $found_elem
-                           {push_back $dx_modifiers ($name ($name $value))}
-                        }
-                        {set $dx_modifiers {array $dx_modifiers}}
                      )
                      (dx_track_theme
-                        {foreach $entry $dx_track_theme
-                           {if {== {elem $entry 0} {basename $name}}
-                              {remove_elem {find $dx_track_theme $name} {elem {find $dx_track_theme $name} 1}}
-                              {push_back {find $dx_track_theme $name} ($name $value)}
-                              {set $found_elem TRUE}
-                           }
+                        {do
+                           ($out {array 0})
+                           ($hold {array 0})
+                           {push_back $out {eval $name}}
+                           {push_back $hold {eval $name}}
+                           {push_back $hold {eval $value}}
+                           {push_back $out {eval $hold}}
+                           {push_back $dx_track_theme {eval $out}}
+                           {set $dx_track_theme {array $dx_track_theme}}
                         }
-                        {unless $found_elem
-                           {push_back $dx_track_theme ($name ($name $value))}
-                        }
-                        {set $dx_track_theme {array $dx_track_theme}}
                      )
                      (dx_settings
-                        {foreach $entry $dx_settings
-                           {if {== {elem $entry 0} {basename $name}}
-                              {remove_elem {find $dx_settings $name} {elem {find $dx_settings $name} 1}}
-                              {push_back {find $dx_settings $name} ($name $value)}
-                              {set $found_elem TRUE}
-                           }
+                        {do
+                           ($out {array 0})
+                           ($hold {array 0})
+                           {push_back $out {eval $name}}
+                           {push_back $hold {eval $name}}
+                           {push_back $hold {eval $value}}
+                           {push_back $out {eval $hold}}
+                           {push_back $dx_settings {eval $out}}
+                           {set $dx_settings {array $dx_settings}}
                         }
-                        {unless $found_elem
-                           {push_back $dx_settings ($name ($name $value))}
-                        }
-                        {set $dx_settings {array $dx_settings}}
                      )
                      (dx_values
-                        {foreach $entry $dx_values
-                           {if {== {elem $entry 0} {basename $name}}
-                              {remove_elem {find $dx_values $name} {elem {find $dx_values $name} 1}}
-                              {push_back {find $dx_values $name} ($name $value)}
-                              {set $found_elem TRUE}
-                           }
+                        {do
+                           ($out {array 0})
+                           ($hold {array 0})
+                           {push_back $out {eval $name}}
+                           {push_back $hold {eval $name}}
+                           {push_back $hold {eval $value}}
+                           {push_back $out {eval $hold}}
+                           {push_back $dx_values {eval $out}}
+                           {set $dx_values {array $dx_values}}
                         }
-                        {unless $found_elem
-                           {push_back $dx_values ($name ($name $value))}
-                        }
-                        {set $dx_values {array $dx_values}}
                      )
                   }
                ;}
@@ -154,7 +149,8 @@
    ;{dx_log_writer info {sprint "Macro: dx_settings_dta_writer"}}
    ;{dx_log_writer info
    ;   {sprintf "Executed dx_settings_dta_writer - time: %.4fms"
-         {time
+         {do
+            ($dx_settings {array 0})
             DX_SETTINGS_POPULATION
             {write_file DX_SETTINGS_FILE_PATH $dx_settings}
          }
@@ -166,7 +162,8 @@
    ;{dx_log_writer info {sprint "Macro: dx_track_theme_dta_writer"}}
    ;{dx_log_writer info
    ;   {sprintf "Executed dx_track_theme_dta_writer - time: %.4fms"
-         {time
+         {do
+            ($dx_track_theme {array 0})
             DX_TRACK_THEME_POPULATION
             {write_file {dx_track_theme_name $dx_track_theme_name} $dx_track_theme}
             {if_else {file_exists {dx_track_theme_name $dx_track_theme_name}}
@@ -182,12 +179,13 @@
    ;{dx_log_writer info {sprint "Macro: dx_values_dta_writer"}}
    ;{dx_log_writer info
    ;   {sprintf "Executed dx_values_dta_writer - time: %.4fms"
-         ;{time
+         {do
+            ($dx_values {array 0})
             DX_VALUES_POPULATION
             {if {! {session is_in_game}}
                {write_file DX_VALUES_FILE_PATH $dx_values}
             }
-         ;}
+         }
    ;   }
    ;}
 }
@@ -196,7 +194,8 @@
    ;{dx_log_writer info {sprint "Macro: dx_modifier_dta_writer"}}
    ;{dx_log_writer info
    ;   {sprintf "Executed dx_modifier_dta_writer - time: %.4fms"
-         {time
+         {do
+            ($dx_modifiers {array 0})
             DX_MODIFIER_POPULATION
             {write_file DX_MODIFIER_FILE_PATH $dx_modifiers}
          }

@@ -31,24 +31,48 @@
 
 ; Vanilla text modifications
 #ifdef HX_PS3
-(accomplishment_launch_wrong_instrument "Du kannst dieses Ziel nicht beginnen, weil der Karrierefortschritt für das erforderliche Instrument nicht gespeichert werden kann. Das erforderliche Instrument muss die Sitzung beenden und ihr dann wieder beitreten, damit der Karrierefortschritt gespeichert werden kann.")
+(accomplishment_launch_wrong_instrument
+   "Du kannst dieses Ziel nicht beginnen, weil der Karrierefortschritt für das erforderliche Instrument nicht gespeichert werden kann. Das erforderliche Instrument muss die Sitzung beenden und ihr dann wieder beitreten, damit der Karrierefortschritt gespeichert werden kann."
+)
 #endif
-(audition_main_loaded_song_error "Song-Status: Fehler bei der Überprüfung!")
-(audition_main_loaded_song_loaded "Song-Status: Song ist bereit für das Vorspielen.")
+(audition_main_loaded_song_error
+   "Song-Status: Fehler bei der Überprüfung!"
+)
+(audition_main_loaded_song_loaded
+   "Song-Status: Song ist bereit für das Vorspielen."
+)
 (audition_main_loaded_song_none "Song-Status: Wartet auf Übertragung ...")
 (audition_main_loaded_song_success "Song-Status: Songdaten sind gültig.")
-(audition_main_loaded_song_transfer_fmt "Song-Status: %.0f%% übertragen ...")
-(audition_main_loaded_song_validating "Song-Status: Songdaten werden überprüft ...")
+(audition_main_loaded_song_transfer_fmt
+   "Song-Status: %.0f%% übertragen ..."
+)
+(audition_main_loaded_song_validating
+   "Song-Status: Songdaten werden überprüft ..."
+)
 (audition_main_network_idling "Netzwerkstatus: Inaktiv")
-(audition_main_network_transfer_error "Netzwerkstatus: Übertragungsfehler, Wiederherstellung ...")
-(audition_main_network_transferring "Netzwerkstatus: Übertragung läuft ...")
+(audition_main_network_transfer_error
+   "Netzwerkstatus: Übertragungsfehler, Wiederherstellung ..."
+)
+(audition_main_network_transferring
+   "Netzwerkstatus: Übertragung läuft ..."
+)
 (audition_main_song_ready "Song geladen")
 (audition_main_title "Vorspielen-Modus")
-(audition_main_validating_failed "Die übertragenen Songdaten sind ungültig. Du kehrst jetzt zum Hauptmenü zurück.")
-(audition_main_welcome "Um deine Songs vorzuspielen, musst du MAGMA auf deinem PC ausführen. Falls du MAGMA noch nicht hast, kannst du es unter http://creators.rockband.com herunterladen.")
-(audition_no_club_found "Um zum Vorspielen-Modus zu gelangen, musst du dich mit einem Xbox LIVE Spielerprofil anmelden, das ein Mitglied des XNA Creators Club ist, und musst mit Xbox LIVE verbunden sein.")
-(audition_no_hard_drive_found "Xbox 360 Festplatte nicht erkannt. Der Vorspielen-Modus erfordert eine Xbox 360 Festplatte.")
-(audition_no_rock_central "Für den Vorspiel-Modus ist eine Verbindung zu den Rock Central-Spielservern erforderlich, diese sind jedoch zurzeit nicht verfügbar. Bitte versuche es später noch einmal.")
+(audition_main_validating_failed
+   "Die übertragenen Songdaten sind ungültig. Du kehrst jetzt zum Hauptmenü zurück."
+)
+(audition_main_welcome
+   "Um deine Songs vorzuspielen, musst du MAGMA auf deinem PC ausführen. Falls du MAGMA noch nicht hast, kannst du es unter http://creators.rockband.com herunterladen."
+)
+(audition_no_club_found
+   "Um zum Vorspielen-Modus zu gelangen, musst du dich mit einem Xbox LIVE Spielerprofil anmelden, das ein Mitglied des XNA Creators Club ist, und musst mit Xbox LIVE verbunden sein."
+)
+(audition_no_hard_drive_found
+   "Xbox 360 Festplatte nicht erkannt. Der Vorspielen-Modus erfordert eine Xbox 360 Festplatte."
+)
+(audition_no_rock_central
+   "Für den Vorspiel-Modus ist eine Verbindung zu den Rock Central-Spielservern erforderlich, diese sind jedoch zurzeit nicht verfügbar. Bitte versuche es später noch einmal."
+)
 (audition_option_disabled "Deaktiviert")
 (audition_option_empty_venue "Leere Arena")
 (audition_option_enabled "Aktiviert")
@@ -71,9 +95,15 @@
 (audition_time_display_section "Bereich")
 (audition_time_display_string_format "%s")
 (bad_review_showing "Songs mit nur 1 Feuerzeug")
-(error_club_member_signed_out "Das Spielerprofil, dessen XNA Creators Club-Mitgliedschaft dazu verwendet wurde, auf den Vorspiel-Modus zuzugreifen, ist nicht mehr angemeldet.")
-(overshell_audition_denial_remote_players "Du kannst leider nicht vorspielen, während du an einer Xbox LIVE Sitzung teilnimmst.")
-(overshell_enter_audition "Am Vorspielen teilnehmen? Nicht gespeicherte Spielfortschritte gehen verloren.")
+(error_club_member_signed_out
+   "Das Spielerprofil, dessen XNA Creators Club-Mitgliedschaft dazu verwendet wurde, auf den Vorspiel-Modus zuzugreifen, ist nicht mehr angemeldet."
+)
+(overshell_audition_denial_remote_players
+   "Du kannst leider nicht vorspielen, während du an einer Xbox LIVE Sitzung teilnimmst."
+)
+(overshell_enter_audition
+   "Am Vorspielen teilnehmen? Nicht gespeicherte Spielfortschritte gehen verloren."
+)
 (prc_tension "Spannungsnote")
 (prc_ugc_section_10_0 "0% - 10%")
 (prc_ugc_section_10_10 "10% - 20%")
@@ -115,17 +145,33 @@
 (the1930s "30er-Songs")
 (the1940s "40er-Songs")
 (the1950s "50er-Songs")
-(token_redemption_error "Leider ist bei der Einlösung des Token-Codes ein Fehler aufgetreten. Bitte versuche es später erneut.")
-(ugc_not_allowed_in_trainers "Für RBN-Songs gibt es keine Song-Lektionen.")
+(token_redemption_error
+   "Leider ist bei der Einlösung des Token-Codes ein Fehler aufgetreten. Bitte versuche es später erneut."
+)
+(ugc_not_allowed_in_trainers
+   "Für RBN-Songs gibt es keine Song-Lektionen."
+)
 (vocal_parts_0 "Kein Gesang")
 
 ; Warnings
-(autoplay_warning "Dieser Modifikator ist dafür da, Charts zu demonstrieren. Autosave wird nun deaktiviert.")
-(author_warning "Dieser Modifikator ist für Chart Autoren gedacht. Kombinier dies mit RPCS3 Kontrollermapping um den alle Instrumentemodus zu benuen.")
-(breakneck_warning "Bitte deaktivier andere Modifikatoren für die Breakneck Geschwindigkeit bevor du diesen aktivierst.")
-(chmode_warning "Der Clone Hero Modus zwingt das Hit Window nachsichtiger zu sein. Speichern wird Deaktiviert und eine Nachricht wird dem Endbildschirm hinzugefügt, wenn du dies aktivierst.")
-(ingame_warning "Diese Einstellung funktioniert nicht im Spiel. Bitte benutz die Einstellungen im \qEinstellungs Menü\q.")
-(settings_warning "Eine dx.dta Datei existiert schon. Um neue Einstellungen zu speichern musst du diese löschen.")
+(autoplay_warning
+   "Dieser Modifikator ist dafür da, Charts zu demonstrieren. Autosave wird nun deaktiviert."
+)
+(author_warning
+   "Dieser Modifikator ist für Chart Autoren gedacht. Kombinier dies mit RPCS3 Kontrollermapping um den alle Instrumentemodus zu benuen."
+)
+(breakneck_warning
+   "Bitte deaktivier andere Modifikatoren für die Breakneck Geschwindigkeit bevor du diesen aktivierst."
+)
+(chmode_warning
+   "Der Clone Hero Modus zwingt das Hit Window nachsichtiger zu sein. Speichern wird Deaktiviert und eine Nachricht wird dem Endbildschirm hinzugefügt, wenn du dies aktivierst."
+)
+(ingame_warning
+   "Diese Einstellung funktioniert nicht im Spiel. Bitte benutz die Einstellungen im \qEinstellungs Menü\q."
+)
+(settings_warning
+   "Eine dx.dta Datei existiert schon. Um neue Einstellungen zu speichern musst du diese löschen."
+)
 
 #include ../../../dx/locale/dx_version.dta
 

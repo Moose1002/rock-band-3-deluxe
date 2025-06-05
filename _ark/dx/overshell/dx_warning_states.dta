@@ -1,4 +1,3 @@
-{push_back $dx_settings_main
    (dxState_GraphicsWarn
       (view
          overshell_continue
@@ -22,9 +21,7 @@
       )
       (cancel {dx_state dxState_Graphics})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_60FPSWarn
       (view
          overshell_continue
@@ -59,9 +56,7 @@
          {dx_state dxState_Graphics}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_HighLODWarn
       (view
          overshell_continue
@@ -92,9 +87,7 @@
          {dx_state dxState_Graphics}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_AutoPlayWarn
       (view
          overshell_continue
@@ -124,9 +117,7 @@
          {leave_dx_settings} {$this show_modifiers}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SlotOptionsWarn
       (view
          os_gotit
@@ -142,9 +133,7 @@
       )
       (cancel {dx_state dxState_ControllerMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SlotOptionsReboot
       (view
          os_no
@@ -160,9 +149,7 @@
       )
       (cancel {dx_state dxState_ControllerMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackAngleSliderMsg
       (view
          overshell_continue
@@ -185,18 +172,14 @@
          (overshell_confirm_ok {dx_state dxState_AngleMenu})
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SettingsWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions settings_warning (overshell_continue))})
       (select (overshell_continue {leave_dx_settings} {$this show_modifiers}))
       (cancel {leave_dx_settings} {$this show_modifiers})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SaveWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions save_warning (os_save os_dontsave))})
@@ -224,9 +207,7 @@
          {overshell update_all}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_ThemeOverwriteWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions track_theme_overwrite_warning (os_overwrite os_dontsave))})
@@ -247,9 +228,7 @@
       )
       (cancel {dx_state dxState_TrackThemeLoader})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_TrackThemeWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions theme_save_warning (os_save os_dontsave))})
@@ -268,63 +247,49 @@
       )
       (cancel {dx_state dxState_AppearanceMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SaveWarnError
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions settings_error (overshell_continue))})
       (select (overshell_continue {leave_dx_settings} {$this leave_options} {overshell update_all}))
       (cancel {leave_dx_settings} {$this leave_options} {overshell update_all})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_ThemeSaveWarnError
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions settings_error (overshell_continue))})
       (select (overshell_continue {dx_state dxState_AppearanceMenu}))
       (cancel {dx_state dxState_AppearanceMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SaveWarnErrorAV
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions settings_error (overshell_continue))})
       (select (overshell_continue {leave_dx_settings} {$this show_options_av_settings} {overshell update_all}))
       (cancel {leave_dx_settings} {$this show_options_av_settings} {overshell update_all})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SettingsSave
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions settings_save (overshell_continue))})
       (select (overshell_continue {dx_state dxState_DeluxeSettings}))
       (cancel {dx_state dxState_DeluxeSettings})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_SettingsSaveError
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions settings_error (overshell_continue))})
       (select (overshell_continue {dx_state dxState_DeluxeSettings}))
       (cancel {dx_state dxState_DeluxeSettings})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_JudgmentWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions judgment_warn (overshell_continue))})
       (select (overshell_continue {dx_state dxState_TrackPerfects}))
       (cancel {dx_state dxState_TrackPerfects})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_PostFXWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions postfx_warning (overshell_continue overshell_cancel))})
@@ -341,9 +306,7 @@
       )
       (cancel {dx_state dxState_PostFX})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_CustomizerWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions customizer_warn (overshell_continue overshell_cancel))})
@@ -386,9 +349,7 @@
       )
       (cancel {dx_state dxState_TextureMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_FakeJukeWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions fakejuke_warning (overshell_continue overshell_cancel))})
@@ -418,9 +379,7 @@
       )
       (cancel {leave_dx_settings} {$this show_modifiers} {overshell update_all})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_CHModeWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions chmode_warning (overshell_continue overshell_cancel))})
@@ -444,9 +403,7 @@
       )
       (cancel {leave_dx_settings} {$this show_modifiers})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_BrutalWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions brutal_warning (overshell_continue overshell_cancel))})
@@ -466,9 +423,7 @@
       )
       (cancel {leave_dx_settings} {$this show_modifiers})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_CalibrationWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions calibration_warning (overshell_continue overshell_cancel))})
@@ -488,9 +443,7 @@
       )
       (cancel {leave_dx_settings} {$this show_modifiers})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_PrecisionWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions precision_warning (overshell_continue overshell_cancel))})
@@ -511,9 +464,7 @@
       )
       (cancel {leave_dx_settings} {$this show_modifiers})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_RebootThemeWarn
       (view overshell_continue overshell_cancel)
       (enter
@@ -537,9 +488,7 @@
       )
       (cancel {dx_state dxState_TrackThemeLoader})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_RebootWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions reboot_warning (overshell_continue overshell_cancel))})
@@ -549,9 +498,7 @@
       )
       (cancel {dx_state dxState_Advanced})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_DebugWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions debug_warning (os_iunderstand os_takemeback))})
@@ -564,9 +511,7 @@
       )
       (cancel {dx_state dxState_Advanced})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_ModifierSongLoad
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions debug_warning (overshell_confirm_yes overshell_confirm_no))})
@@ -583,9 +528,7 @@
       )
       (cancel {leave_dx_settings} {$this show_modifiers})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_MenuBGWarn
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions os_bgwarn (overshell_continue))})
@@ -600,18 +543,14 @@
          {dx_state dxState_MenuBG}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_ReloadDenyMsg
       (view overshell_continue overshell_cancel)
       (enter {handle ($this set_confirm_actions os_reload_deny (overshell_continue))})
       (select (overshell_continue {dx_state dxState_CameraMenu}))
       (cancel {dx_state dxState_CameraMenu})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_HimemWarn
       (view overshell_continue overshell_cancel)
       (enter
@@ -627,9 +566,7 @@
       )
       (cancel {dx_state dxState_DeluxeSettings})
    )
-}
 
-{push_back $dx_settings_main
    (dxState_colorrSliderMsg
       (view overshell_continue overshell_cancel)
       (enter
@@ -646,9 +583,7 @@
          {dx_state dxState_rgbcolormenu}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_colorgSliderMsg
       (view overshell_continue overshell_cancel)
       (enter
@@ -665,9 +600,7 @@
          {dx_state dxState_rgbcolormenu}
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_colorbSliderMsg
       (view overshell_continue overshell_cancel)
       (enter
@@ -684,4 +617,3 @@
          {dx_state dxState_rgbcolormenu}
       )
    )
-}

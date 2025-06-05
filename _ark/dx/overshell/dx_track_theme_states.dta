@@ -43,7 +43,7 @@
       {dx_passive_messenger no_track_theme_found}
    }
 )
-{push_back $dx_settings_main
+
    (dxState_TrackThemeLoader
       (view
          os_blnk
@@ -173,7 +173,7 @@
       (select
          (os_settex {dx_state dxState_TextureMenu})
          (default
-            {eval {elem {find $dx_settings_main dxState_TrackThemeLoader select _fallthrough} 1}}
+            {eval {elem {find $syscfg dx_settings dxState_TrackThemeLoader select _fallthrough} 1}}
             {dx_state dxState_RebootThemeWarn}
          )
          (load_theme
@@ -255,4 +255,3 @@
       )
       (cancel {dx_state dxState_DeluxeSettings})
    )
-}

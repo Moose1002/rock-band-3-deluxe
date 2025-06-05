@@ -1,3 +1,4 @@
+#ifdef RB3DX_DEV
 #define MOVE_IT
 (
    {$this iterate Mesh $m {$m set_showing FALSE}}
@@ -45,7 +46,6 @@
       }
    }
 )
-{push_back $dx_settings_main
    (dxState_MiloPanels
       (view os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk)
       (message none)
@@ -94,9 +94,7 @@
          }
       )
    )
-}
 
-{push_back $dx_settings_main
    (dxState_MiloObjects
       (view os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk)
       (message
@@ -153,8 +151,7 @@
          }
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_MiloFind
       (view os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk)
       (message none)
@@ -265,8 +262,7 @@
          MOVE_IT_BACK
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_MiloRnd
       (view os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk os_blnk)
       (enter
@@ -500,7 +496,7 @@
          MOVE_IT_BACK
       )
    )
-}
+#endif
 #ifdef DISABLED
 #define DX_SET_RBG_COLOR_DATA
 (

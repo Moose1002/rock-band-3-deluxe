@@ -1,4 +1,3 @@
-{push_back $dx_settings_main
    (dxState_Advanced
       (view
          #ifndef HX_WII os_menu_options #endif
@@ -30,8 +29,7 @@
       )
       (cancel {dx_state dxState_DeluxeSettings})
    )
-}
-{push_back $dx_settings_main
+
    (dxState_MenuOptions
       #define SET_STRIP_COLOR
       (
@@ -104,8 +102,7 @@
          SET_STRIP_COLOR
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_MenuTheme
       (view
          os_rb3_menu_theme
@@ -132,8 +129,7 @@
       )
       (cancel {dx_state dxState_MenuThemer})
    )
-}
-{push_back $dx_settings_main
+
    (dxState_MenuColor
       (message pos_remap_desc)
       (view
@@ -226,8 +222,7 @@
          (kAction_Right LIST_DIREC)
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_FunctionalOptions
       (view
          #ifndef HX_WII
@@ -297,8 +292,7 @@
          {dx_state dxState_Advanced}
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_LogSettings
       (view
          os_logging_disable_all
@@ -327,8 +321,7 @@
       )
       (cancel {dx_state dxState_Debug})
    )
-}
-{push_back $dx_settings_main
+
    (dxState_Debug
       #ifdef HX_XBOX
       #define DX_SONGS_UPDATES_FILE_PATH
@@ -375,7 +368,9 @@
       #endif
       (view
          os_debug_mode
+         #ifdef RB3DX_DEV
          os_milo
+         #endif
          os_logging
          #ifdef HX_PS3
          {if_else {file_exists DX_HI_MEM_PATH}
@@ -493,8 +488,7 @@
          {dx_state dxState_Advanced}
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_PositionRemapper
       (view
          {if_else {&& $dx_list_item_selected {!= $dx_list_pos 0}} os_blnk os_reset}
@@ -708,7 +702,6 @@
                   }
                   {dx_set_star_display_pos}
                   {dx_set_scoreboard_pos}
-                  {dx_fix_new_song_progress_pos}
                }
             )
             (solo_box
@@ -772,7 +765,7 @@
          {set $dx_pos_current_interval {elem $dx_pos_interval_list $dx_pos_remapper_array_number}} ;1 unit
          DX_TRANSLATE_POS_VARIABLES_TO_LOCAL
          {do
-            ($arr {find $dx_settings_main $this_state view})
+            ($arr {find $syscfg dx_settings $this_state view})
             ($data {array 0})
             {foreach $entry $arr
                {if {!= $entry view}
@@ -864,8 +857,7 @@
          (kAction_Right LIST_POS_DIREC)
       )
    )
-}
-{push_back $dx_settings_main
+
    (dxState_ChatSettings
       (view
          {sprintf "1: %s" $dx_chat_preset_0}
@@ -895,8 +887,7 @@
       )
       (cancel {dx_state dxState_OnlineFeatures})
    )
-}
-{push_back $dx_settings_main
+
    (dxState_SelectChatPreset
       (view DX_QUICK_CHAT_PHRASES)
       (message 
@@ -919,8 +910,7 @@
       )
       (cancel {dx_state dxState_ChatSettings})
    )
-}
-{push_back $dx_settings_main
+
    (dxState_BotSettings
       (view
          os_dx_bot_skill
@@ -1019,4 +1009,3 @@
          {$this show_options}
       )
    )
-}

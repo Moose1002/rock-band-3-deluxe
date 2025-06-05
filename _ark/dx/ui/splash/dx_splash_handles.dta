@@ -189,15 +189,17 @@
 )
 #define DX_YELLOW_SPLASH_TEXT
 (
-      {set $array DX_SPLASHTEXT}
-      #ifdef HX_XBOX
-      {push_back $array dx_splash_14}
-      #ifndef RB3E
-      {push_back $array dx_splash_15}
-      #endif
-      #endif
+      {do
+         ($array DX_SPLASHTEXT)
+         #ifdef HX_XBOX
+         {push_back $array dx_splash_14}
+         #ifndef RB3E
+         {push_back $array dx_splash_15}
+         #endif
+         #endif
 
-      {dx_splashtext.btn set text_token {random_elem {elem $array $index}}} ; dx - set a random splash text
+         {dx_splashtext.btn set text_token {random_elem {elem $array $index}}} ; dx - set a random splash text
+      }
       {dx_splashtext.btn set_local_pos 197.5 0 140}
       ;{dx_splashtext.btn set_local_scale 0.75}
       {dx_splashtext.btn set_local_rot 35 12.5 -25} ; dx - set the position of the splash text
