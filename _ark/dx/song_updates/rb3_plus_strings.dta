@@ -195,6 +195,7 @@
    (real_guitar_tuning (0 0 0 0 0 0))
    (real_bass_tuning (0 0 0 0))
    (strings_author "RK")
+   (rhythm_rank 138)
 )(flirtinwithdisaster
    (upgrade_version 1) 
    (rank

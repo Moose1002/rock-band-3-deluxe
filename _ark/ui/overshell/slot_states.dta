@@ -2812,11 +2812,21 @@
             {switch
                {$component selected_sym}
                (overshell_guitar
+                  {dx_override_track_part kTrackGuitar 'PART GUITAR'} ; reset any overridden tracks
                   {$this select_part kTrackGuitar})
                (overshell_bass
+                  {dx_override_track_part kTrackBass 'PART BASS'} ; reset any overridden tracks
                   {$this select_part kTrackBass})
                (overshell_keys
+                  {dx_override_track_part kTrackKeys 'PART KEYS'} ; reset any overridden tracks
                   {$this select_part kTrackKeys})
+               (os_rhythm
+                  {if {> $rhythmrankvar 0}
+                     {dx_override_track_part $dx_rhythm_track 'PART RHYTHM'}
+                     {$this select_part $dx_rhythm_track}
+                     ;{{$this get_user} set_track_type $dx_rhythm_track}
+                     ;{$this show_state kState_ChooseDiff}
+                  })   
                (overshell_real_guitar
                   {$this select_part kTrackRealGuitar}
                   {if
@@ -2904,6 +2914,7 @@
             (overshell_guitar kTrackGuitar)
             (overshell_bass kTrackBass)
             (overshell_keys kTrackKeys)
+            (os_rhythm $dx_rhythm_track)
             (overshell_real_guitar kTrackRealGuitar)
             (overshell_real_bass kTrackRealBass)
             (overshell_real_guitar_22 kTrackRealGuitar) ; dx - shows real_guitar diff on 22 part

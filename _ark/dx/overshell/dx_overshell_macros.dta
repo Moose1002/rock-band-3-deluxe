@@ -452,6 +452,9 @@
       {push_back $options overshell_guitar}
       {push_back $options overshell_bass}
       {push_back $options overshell_keys}
+      {if {!= $dx_rhythm_track kTrackNone}
+         {push_back $options os_rhythm}
+      }
       {if {|| $dx_additional_parts {! {session_mgr is_local}}}
          {if {== $dx_joypad_type_vocals kControllerGuitar}
             {push_back $options overshell_drums}

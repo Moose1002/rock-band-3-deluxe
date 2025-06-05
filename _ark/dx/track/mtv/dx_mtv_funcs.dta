@@ -7,7 +7,7 @@
    {set $guitarrankvar -1} {set $bassrankvar -1} {set $drumrankvar -1} {set $keysrankvar -1} {set $vocalsrankvar -1} {set $bandrankvar -1}
    {set $real_guitarrankvar -1} {set $real_bassrankvar -1} {set $real_keysrankvar -1}
    {set $actual_guitarrankvar -1} {set $actual_bassrankvar -1} {set $actual_keysrankvar -1} {set $actual_drumrankvar -1} {set $actual_vocalsrankvar -1} {set $actual_bandrankvar -1}
-   {set $actual_real_guitarrankvar -1} {set $actual_real_bassrankvar -1} {set $actual_real_keysrankvar -1}
+   {set $actual_real_guitarrankvar -1} {set $actual_real_bassrankvar -1} {set $actual_real_keysrankvar -1} {set $rhythmrankvar -1}
 }
 {func
    dx_rank_var_finder

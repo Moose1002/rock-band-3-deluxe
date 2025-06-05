@@ -536,6 +536,12 @@ DX_CURRENT_SONG_CLEAR
 ;allows for a lower angle to be used in multiplayer
 {set $dx_allow_lower_angle FALSE}
 
+{set $rhythmrankvar 0}
+{set $dx_rhythm_track kTrackKeys}
+{set $dx_guitar_track_part 'PART GUITAR'}
+{set $dx_bass_track_part 'PART BASS'}
+{set $dx_keys_track_part 'PART KEYS'}
+
 ;sets full combo sound effect.
 {set $dx_fullcombo_sound goul-nug_fc}
 {set $dx_jurgen_sound FALSE}

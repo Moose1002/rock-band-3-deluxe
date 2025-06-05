@@ -60,6 +60,9 @@
       {if {find_exists $songdtareader keys_author}
          {set $keysauthorvar {elem {find $songdtareader keys_author} 1}}
       }
+      {if {find_exists $songdtareader rhythm_rank}
+         {set $rhythmrankvar {elem {find $songdtareader rhythm_rank} 1}}
+      }
       {if {|| {find_exists $songdtareader song_key} {find_exists $songdtareader vocal_tonic_note}}
          {if {find_exists $songdtareader vocal_tonic_note}
             {set $dx_vocal_tonic_note_var {elem {find $songdtareader vocal_tonic_note} 1}}
@@ -94,6 +97,7 @@
             {set $dx_song_key_var {sprint $dx_song_key_var "_minor"}}
          }
       }
+
       {dx_rank_var_finder guitar 139 176 221 267 333 409}
       {dx_rank_var_finder drum 124 151 178 242 345 448}
       {dx_rank_var_finder bass 135 181 228 293 364 436}

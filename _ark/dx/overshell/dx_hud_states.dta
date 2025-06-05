@@ -40,6 +40,11 @@
          {if_else {== $dx_crowd_meter_hud dx_on} os_vis_default 0}
          {if_else {== $dx_crowd_meter_hud dx_off} os_vis_static 0}
          {if_else {== $dx_crowd_meter_hud dx_disabled} os_vis_disabled 0}
+         ;rhythm track select
+         {if_else {== $dx_rhythm_track kTrackGuitar} os_rhythm_track_guitar 0}
+         {if_else {== $dx_rhythm_track kTrackBass} os_rhythm_track_bass 0}
+         {if_else {== $dx_rhythm_track kTrackKeys} os_rhythm_track_keys 0}
+         {if_else {== $dx_rhythm_track kTrackNone} os_rhythm_track_disabled 0}
          {if_else $dx_fail_flash os_fail_flash_on os_fail_flash_off}
          ;stars
          {if_else $dx_gold_star_progress os_star_gold_fill_on os_star_gold_fill_off}
@@ -58,9 +63,28 @@
                {dx_toggle_fail_feedback}
             }
          )
+         #define RHYTHM_TRACK_SELECT
+         (
+            {do
+               {set $dx_rhythm_track
+                  {switch $dx_rhythm_track
+                     (kTrackGuitar kTrackBass) ; - Commented out in hopes we can find a way to swap parts
+                     (kTrackBass kTrackKeys)
+                     (kTrackKeys kTrackNone)
+                     ;(kTrackNone kTrackKeys)
+                     (kTrackNone kTrackGuitar)
+                  }
+               }
+               {dx_toggle_fail_feedback}
+            }
+         )
          (os_vis_static CROWD_METER_SELECT)
          (os_vis_default CROWD_METER_SELECT)
          (os_vis_disabled CROWD_METER_SELECT)
+         (os_rhythm_track_guitar RHYTHM_TRACK_SELECT)
+         (os_rhythm_track_bass RHYTHM_TRACK_SELECT)
+         (os_rhythm_track_keys RHYTHM_TRACK_SELECT)
+         (os_rhythm_track_disabled RHYTHM_TRACK_SELECT)
          (os_fail_flash {set $dx_fail_flash {! $dx_fail_flash}})
          (os_star_gold_fill {set $dx_gold_star_progress {! $dx_gold_star_progress}})
       )

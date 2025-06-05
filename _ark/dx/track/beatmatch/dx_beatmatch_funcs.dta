@@ -63,3 +63,17 @@
       }
    }
 }
+{func
+   dx_override_track_part ($track $part_name) ; Override $track with $part_name
+   {switch $track
+      (kTrackGuitar
+         {set $dx_guitar_track_part $part_name}
+      )
+      (kTrackBass
+         {set $dx_bass_track_part $part_name}
+      )
+      (kTrackKeys
+         {set $dx_keys_track_part $part_name}
+      )
+   }
+}
