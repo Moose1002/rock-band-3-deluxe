@@ -2965,12 +2965,13 @@
                   {dx_override_track_part kTrackKeys 'PART KEYS'} ; reset any overridden tracks
                   {$this select_part kTrackKeys})
                (os_rhythm
-                  {if {> $rhythmrankvar 0}
-                     {dx_override_track_part $dx_rhythm_track 'PART RHYTHM'}
+                  ;{if {> $rhythmrankvar 0}
+                     {dx_override_track_part $dx_rhythm_track 'PART BASS'}
                      {$this select_part $dx_rhythm_track}
                      ;{{$this get_user} set_track_type $dx_rhythm_track}
                      ;{$this show_state kState_ChooseDiff}
-                  })   
+                  ;}
+               )   
                (overshell_real_guitar
                   {$this select_part kTrackRealGuitar}
                   {if {gamemode in_mode trainer}
