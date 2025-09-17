@@ -1966,38 +1966,48 @@
             {unless {'||' {ui in_transition} [waiting_for_sort]}
                {do
                   ($type {{music_library get_highlighted_node} get_node_type})
-                  {if
-                     {'||'
-                        {== $type kNodeFunction}
-                        {== $type kNodeSetlist}
-                        {! {music_library viewing_setlists}}
-                     }
-                     {play_instr_sfx $user button_select}
-                     {if {== {{music_library get_highlighted_node} get_node_type} kNodeSong}
-                        {if {> {{music_library get_highlighted_node} get_score} 0}
-                           {foreach $entry $highscore_tracker
-                              {if {!= {elem $entry 0} {{music_library get_highlighted_node} get_token}} ;check if the state isnt in the list
-                                 {set $pushtime_highscore TRUE} ;get ready to push it
+                  {if {== $archipelago_mode TRUE}
+                     {if
+                        {'||'
+                           {== $type kNodeFunction}
+                           {== $type kNodeSetlist}
+                           {! {music_library viewing_setlists}}
+                        }
+                        {set $song_unlocked FALSE}
+                        {foreach $starter_song $archipelago_starter_songs
+                           {if {== $starter_song {{music_library get_highlighted_node} get_token}}
+                              {set $song_unlocked TRUE}
+                           }
+                        }
+                        {if {== $song_unlocked TRUE}
+                           {play_instr_sfx $user button_select}
+                           {if {== {{music_library get_highlighted_node} get_node_type} kNodeSong}
+                              {if {> {{music_library get_highlighted_node} get_score} 0}
+                                 {foreach $entry $highscore_tracker
+                                    {if {!= {elem $entry 0} {{music_library get_highlighted_node} get_token}} ;check if the state isnt in the list
+                                       {set $pushtime_highscore TRUE} ;get ready to push it
+                                    }
+                                 }
+                                 {foreach $entry $highscore_tracker
+                                    {if {== {elem $entry 0} {{music_library get_highlighted_node} get_token}} ;check the list again, and if it is in the list
+                                       {set $pushtime_highscore FALSE} ;dont push it
+                                    }
+                                 }
+                                 {if $pushtime_highscore ;if we need to push
+                                    {push_back
+                                       $highscore_tracker
+                                       ({{music_library get_highlighted_node} get_token}
+                                          {{music_library get_highlighted_node} get_score}
+                                       )
+                                    } ;push_back a new state into the array
+                                 }
+                                 {set $highscore_tracker {array $highscore_tracker}}
+                                 ;{dx_passive_messenger_symbol {sprint $highscore_tracker}}
                               }
                            }
-                           {foreach $entry $highscore_tracker
-                              {if {== {elem $entry 0} {{music_library get_highlighted_node} get_token}} ;check the list again, and if it is in the list
-                                 {set $pushtime_highscore FALSE} ;dont push it
-                              }
-                           }
-                           {if $pushtime_highscore ;if we need to push
-                              {push_back
-                                 $highscore_tracker
-                                 ({{music_library get_highlighted_node} get_token}
-                                    {{music_library get_highlighted_node} get_score}
-                                 )
-                              } ;push_back a new state into the array
-                           }
-                           {set $highscore_tracker {array $highscore_tracker}}
-                           ;{dx_passive_messenger_symbol {sprint $highscore_tracker}}
+                           {music_library select_highlighted_node $user}
                         }
                      }
-                     {music_library select_highlighted_node $user}
                   }
                }
             }

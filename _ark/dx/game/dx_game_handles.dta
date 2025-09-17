@@ -108,6 +108,7 @@
          {beatmatch foreach_active_player $player
             {dx_clean_solo_box $player {$player instrument}}
          }
+         {dx_archipelago_update_stars {meta_performer song} {{{coop_track_panel find scoreboard} find star_display} get num_stars}}
       }
       {if {&& $dx_you_rock {! {gamemode in_mode practice}} {! {gamemode in_mode trainer}}}
          {{coop_track_panel find tracker_broadcast_display} set_showing TRUE}

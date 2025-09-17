@@ -496,6 +496,8 @@ DX_CURRENT_SONG_CLEAR
    {set_var {sprint "dx_overdrive_" $elem} none}
 }
 
+{set $archipelago_mode TRUE}
+
 ;sets default smasher track textures.
 {set $dx_smasher none}
 

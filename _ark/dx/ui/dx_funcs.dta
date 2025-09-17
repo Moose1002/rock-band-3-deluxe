@@ -1,5 +1,6 @@
 #include dx_mesh_funcs.dta
 #include dx_search_funcs.dta
+#include dx_archipelago_funcs.dta
 #include dx_fix_special_chars.dta
 {func
    dx_store_meta_info

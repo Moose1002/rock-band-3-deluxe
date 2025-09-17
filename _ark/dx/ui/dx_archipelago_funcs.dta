@@ -1,0 +1,39 @@
+
+{set $archipelago_starter_songs {array (
+    iloverocknroll
+    thehardestbutton
+    justlikeheaven
+    iwannabesedated
+    lastdance
+    lowrider
+    outerspacemuffs
+    yoshimibattles
+    spaceoddity
+    oyemiamor
+    walkinonthesun
+)}}
+
+{func dx_archipelago_update_stars ($shortname $stars_earned)
+    {do
+        ($archipelago_data_path {sprint DX_GAMEDATA_ROOT "dx_archipelago_data.dta"})
+        {if_else {file_exists $archipelago_data_path}
+            {do
+                ($shortname_found FALSE)
+                ($archipelago_data {read_file $archipelago_data_path})
+                {foreach_int $i 0 {size $archipelago_data}
+                    {if {== {elem {elem $archipelago_data $i} 0} $shortname}
+                        {if {> $stars_earned {elem {elem $archipelago_data $i} 1}}
+                            {set_elem $archipelago_data $i {array ($shortname $stars_earned)}}
+                        }
+                        {set $shortname_found TRUE}
+                    }
+                }
+                {if {== $shortname_found FALSE}
+                    {push_back $archipelago_data {array ($shortname $stars_earned)}}
+                }
+                {write_file $archipelago_data_path $archipelago_data}
+            }
+            {write_file $archipelago_data_path {array (($shortname $stars_earned))}}
+        }
+    }   
+}
